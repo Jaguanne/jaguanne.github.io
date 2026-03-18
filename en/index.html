@@ -52,7 +52,37 @@ section h2::after {
 
 ul { margin-left: 20px; list-style-type: disc; }
 
-/* Parallax images */
+/* Hero header */
+.hero-text {
+  background-color: var(--primary);
+  padding: 80px 20px 40px 20px;
+  text-align: center;
+}
+
+.hero-text h1 { font-size: 3rem; margin: 0; }
+.hero-text h1 .contrast { color: var(--contrast); }
+.hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
+
+/* Hero image */
+.hero-banner-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: auto;
+  min-height: 400px;
+}
+
+.hero-banner {
+  width: 100%;
+  height: 100%;
+  background-image: url('/my-eyes-lime-black-2.jpg');
+  background-size: 100% auto; /* full width, keep aspect ratio */
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Parallax images (other sections) */
 .parallax {
   width: 100%;
   min-height: 400px;
@@ -70,30 +100,6 @@ ul { margin-left: 20px; list-style-type: disc; }
   background: rgba(26,42,47,0.5);
 }
 
-/* Hero header */
-.hero-text {
-  background-color: var(--primary);
-  padding: 80px 20px 40px 20px;
-  text-align: center;
-}
-
-.hero-text h1 { font-size: 3rem; margin: 0; }
-.hero-text h1 .contrast { color: var(--contrast); }
-.hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
-
-/* Hero image as parallax but using full width and natural aspect ratio */
-.hero-banner {
-  width: 100%;
-  height: auto;
-  min-height: 400px;
-  background-image: url('/my-eyes-lime-black-2.jpg');
-  background-size: 100% auto; /* use full image width, preserve aspect ratio */
-  background-position: center center;
-  background-repeat: no-repeat;
-  position: relative;
-  background-attachment: fixed;
-}
-
 /* Steps / cards */
 .steps { display: grid; gap: 30px; grid-template-columns: 1fr; }
 @media(min-width: 700px) { .steps { grid-template-columns: repeat(2, 1fr); } }
@@ -106,13 +112,8 @@ ul { margin-left: 20px; list-style-type: disc; }
 }
 .step:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
 
-/* Gain section - compact row layout */
-.gain-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 40px;
-}
+/* Gain section */
+.gain-list { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
 .gain-item {
   background-color: var(--secondary);
   padding: 20px 15px;
@@ -156,8 +157,10 @@ footer a.button:hover { background-color: var(--text); }
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
 
-<!-- Hero Image as full-width parallax with natural colors -->
-<div class="parallax hero-banner"></div>
+<!-- Hero image -->
+<div class="hero-banner-wrapper">
+  <div class="hero-banner"></div>
+</div>
 
 <!-- Who is this for -->
 <section id="who">
@@ -272,6 +275,21 @@ function revealGainItems() {
 }
 window.addEventListener('scroll', revealGainItems);
 window.addEventListener('load', revealGainItems);
+
+// Hero parallax scroll
+const hero = document.querySelector('.hero-banner');
+const heroWrapper = document.querySelector('.hero-banner-wrapper');
+const heroOffset = heroWrapper.offsetTop;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if(scrollY > heroOffset) {
+    // Parallax effect after reaching top
+    hero.style.backgroundPositionY = `${-((scrollY - heroOffset) * 0.3)}px`;
+  } else {
+    hero.style.backgroundPositionY = 'center';
+  }
+});
 </script>
 
 </body>
