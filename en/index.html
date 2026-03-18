@@ -30,10 +30,9 @@ a:hover { color: var(--secondary); }
 section {
   padding: 80px 20px;
   max-width: 900px;
-  margin: auto;
+  margin: auto 0 60px auto;
   background-color: var(--primary);
   border-radius: 12px;
-  margin-bottom: 60px;
 }
 
 section h2 {
@@ -71,10 +70,7 @@ ul { margin-left: 20px; list-style-type: disc; }
   background: rgba(26,42,47,0.5);
 }
 
-/* Hero image styling */
-.hero-banner { margin-bottom: 0; }
-
-/* Header above hero */
+/* Hero text section */
 .hero-text {
   background-color: var(--primary);
   padding: 120px 20px;
@@ -137,14 +133,14 @@ footer a.button:hover { background-color: var(--text); }
 </head>
 <body>
 
-<!-- Hero image -->
-<div class="parallax hero-banner" style="background-image: url('/my-eyes-lime-black.jpg');"></div>
-
-<!-- Header and subheader -->
+<!-- Header + subheader -->
 <div class="hero-text">
   <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
+
+<!-- Hero image -->
+<div class="parallax hero-banner" style="background-image: url('/my-eyes-lime-black.jpg');"></div>
 
 <!-- Who is this for -->
 <section id="who">
@@ -155,6 +151,33 @@ footer a.button:hover { background-color: var(--text); }
     <li>Startups needing external validation</li>
     <li>Product owners who want structured feedback from outside the team</li>
   </ul>
+</section>
+
+<!-- What you gain -->
+<section id="gain">
+  <h2>What you gain</h2>
+  <div class="gain-list">
+    <div class="gain-item">
+      <div class="gain-number">1</div>
+      <p>Confidence before release</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">2</div>
+      <p>Fewer unpleasant surprises post-launch</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">3</div>
+      <p>Clear documentation of issues and risks</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">4</div>
+      <p>Stronger credibility toward your users</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">5</div>
+      <p>An external quality checkpoint</p>
+    </div>
+  </div>
 </section>
 
 <!-- FEST-1 -->
@@ -198,32 +221,8 @@ footer a.button:hover { background-color: var(--text); }
 <!-- FEST-3 -->
 <div class="parallax" style="background-image: url('/FEST-3.png');"></div>
 
-<!-- What you gain -->
-<section id="gain">
-  <h2>What you gain</h2>
-  <div class="gain-list">
-    <div class="gain-item">
-      <div class="gain-number">1</div>
-      <p>Confidence before release</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">2</div>
-      <p>Fewer unpleasant surprises post-launch</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">3</div>
-      <p>Clear documentation of issues and risks</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">4</div>
-      <p>Stronger credibility toward your users</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">5</div>
-      <p>An external quality checkpoint</p>
-    </div>
-  </div>
-</section>
+<!-- FEST-5 -->
+<div class="parallax" style="background-image: url('/FEST-5.png');"></div>
 
 <!-- How it works -->
 <section id="how">
