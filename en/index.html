@@ -14,6 +14,7 @@
   --contrast: #BEF812;
 }
 
+/* General body styles */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -32,7 +33,7 @@ a:hover {
   color: var(--secondary);
 }
 
-/* Full-width hero and section backgrounds */
+/* Parallax / full-width sections */
 .parallax {
   width: 100%;
   min-height: 400px;
@@ -43,48 +44,42 @@ a:hover {
   position: relative;
 }
 
-/* Overlay for readability */
 .parallax::before {
   content: "";
   position: absolute;
   top:0; left:0; width:100%; height:100%;
-  background: rgba(26,42,47,0.6); /* dark overlay */
+  background: rgba(26,42,47,0.5); /* overlay for readability */
 }
 
-/* Header text */
-header {
+/* Hero overlay text */
+.hero-text {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  position: relative;
-  z-index: 1;
-  padding: 120px 20px 80px 20px;
+  padding: 120px 20px;
+  color: var(--text);
 }
 
-header h1 {
+.hero-text h1 {
   font-size: 3rem;
   margin: 0;
-  z-index: 2;
-  position: relative;
 }
 
-header h1 .contrast {
+.hero-text h1 .contrast {
   color: var(--contrast);
 }
 
-header p {
+.hero-text p {
   font-size: 1.2rem;
   max-width: 700px;
   margin-top: 20px;
-  opacity: 0;
-  animation: fadeIn 1s forwards 0.5s;
-  z-index: 2;
-  position: relative;
 }
 
-/* Section styling */
+/* Sections */
 section {
   padding: 80px 20px;
   max-width: 900px;
@@ -109,6 +104,32 @@ section h2::after {
 ul {
   margin-left: 20px;
   list-style-type: disc;
+}
+
+/* Pop-up cards for "What you gain" */
+.gain-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+@media(min-width: 700px) {
+  .gain-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gain-card {
+  background-color: var(--secondary);
+  padding: 25px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+.gain-card.visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* Steps / cards */
@@ -153,33 +174,19 @@ footer a.button {
 footer a.button:hover {
   background-color: var(--text);
 }
-
-/* Animations */
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-/* Content over parallax sections */
-.parallax-content {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: auto;
-  padding: 120px 20px;
-  color: var(--text);
-}
 </style>
 </head>
 <body>
 
-<!-- Hero -->
+<!-- Hero Image -->
 <div class="parallax" style="background-image: url('/my-eyes-lime-black.jpg');">
-  <div class="parallax-content">
+  <div class="hero-text">
     <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
     <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
   </div>
 </div>
 
+<!-- Who is this for -->
 <section id="who">
   <h2>Who is this for</h2>
   <ul>
@@ -190,17 +197,19 @@ footer a.button:hover {
   </ul>
 </section>
 
-<!-- FEST-1 -->
+<!-- FEST-1 Section -->
 <div class="parallax" style="background-image: url('/FEST-1.png');"></div>
 
+<!-- Why external testing matters -->
 <section id="why">
   <h2>Why external testing matters</h2>
   <p>Developers and other internal team members know the product too well, which causes "blind spots" to appear. People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration. External software testing adds objectivity, structure, and more realistic user perspective before your product reaches customers.</p>
 </section>
 
-<!-- FEST-4 -->
+<!-- FEST-4 Section -->
 <div class="parallax" style="background-image: url('/FEST-4.png');"></div>
 
+<!-- What I test -->
 <section id="what">
   <h2>What I test</h2>
   <p>The software testing I do is primarily based on agreed user scenarios and roles.</p>
@@ -226,9 +235,22 @@ footer a.button:hover {
   </ul>
 </section>
 
-<!-- FEST-3 -->
+<!-- FEST-3 Section -->
 <div class="parallax" style="background-image: url('/FEST-3.png');"></div>
 
+<!-- What you gain -->
+<section id="gain">
+  <h2>What you gain</h2>
+  <div class="gain-cards">
+    <div class="gain-card">Confidence before release</div>
+    <div class="gain-card">Fewer unpleasant surprises post-launch</div>
+    <div class="gain-card">Clear documentation of issues and risks</div>
+    <div class="gain-card">Stronger credibility toward your users</div>
+    <div class="gain-card">An external quality checkpoint</div>
+  </div>
+</section>
+
+<!-- How it works -->
 <section id="how">
   <h2>How it works</h2>
   <div class="steps">
@@ -251,17 +273,7 @@ footer a.button:hover {
   </div>
 </section>
 
-<section id="gain">
-  <h2>What you gain</h2>
-  <ul>
-    <li>Confidence before release</li>
-    <li>Fewer unpleasant surprises post-launch</li>
-    <li>Clear documentation of issues and risks</li>
-    <li>Stronger credibility toward your users</li>
-    <li>An external quality checkpoint</li>
-  </ul>
-</section>
-
+<!-- Contact -->
 <section id="contact">
   <h2>Contact me</h2>
   <p>Let's be in touch and find out how I can help you!</p>
@@ -271,6 +283,22 @@ footer a.button:hover {
 <footer>
   <p>&copy; 2026 FreshEyes Software Testing</p>
 </footer>
+
+<script>
+// Simple reveal animation for gain cards
+const gainCards = document.querySelectorAll('.gain-card');
+function revealCards() {
+  const windowBottom = window.innerHeight + window.scrollY;
+  gainCards.forEach(card => {
+    const cardTop = card.offsetTop;
+    if(windowBottom > cardTop + 50) {
+      card.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
+</script>
 
 </body>
 </html>
