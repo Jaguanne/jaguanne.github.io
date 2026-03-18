@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshEyes Software Testing</title>
 
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0D1B1E;
+      --primary-light: #325055;
+      --text: #F3F5F7;
+      --background: #1A2A2F;
+      --accent: #BEF812;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    h2 {
+      margin-top: 50px;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .hero {
+      margin-bottom: 40px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--primary-light);
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 20px;
+    }
+
+    .step {
+      background: var(--primary);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .step strong {
+      color: var(--accent);
+    }
+
+    .cta {
+      margin-top: 50px;
+      padding: 30px;
+      background: var(--primary);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin-bottom: 15px;
+    }
+
+    .cta a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 20px;
+      background: var(--accent);
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    nav {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 10px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <nav>
+      <a href="/en/">EN</a> | <a href="/fi/">FI</a>
+    </nav>
+
+    <div class="hero">
+      <h1><span>FreshEyes</span> Software Testing</h1>
+      <p>
+        Independent, structured software testing before release - so your end users won't discover the issues first.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Who is this for</h2>
+      <ul>
+        <li>Software developers and development teams wanting a fresh view of their product</li>
+        <li>Digital product developers preparing for a release</li>
+        <li>Startups needing external validation</li>
+        <li>Product owners who want structured feedback from outside the team</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Why external testing matters</h2>
+      <p>
+        Developers and other internal team members know the product too well, which causes "blind spots" to appear.
+        People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration.
+      </p>
+      <p>
+        External software testing adds objectivity, structure, and a more realistic user perspective before your product reaches customers.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>What I test</h2>
+      <p>The software testing is primarily based on agreed user scenarios and roles.</p>
+
+      <p><strong>Core user scenarios:</strong></p>
+      <ul>
+        <li>Key user journeys (e.g. sign-up, checkout, submission, settings)</li>
+        <li>Goal-based usage flows</li>
+        <li>Critical paths before release</li>
+      </ul>
+
+      <p><strong>User roles:</strong></p>
+      <ul>
+        <li>End user</li>
+        <li>Admin</li>
+        <li>Manager / other internal role</li>
+        <li>Other roles with different access rights</li>
+      </ul>
+
+      <p><strong>Additional focus:</strong></p>
+      <ul>
+        <li>Usability and clarity</li>
+        <li>Logical consistency</li>
+        <li>Edge cases</li>
+        <li>Error handling</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><strong>1. Alignment call</strong><br>Define scope, user scenarios, roles, and timeline.</div>
+        <div class="step"><strong>2. Structured testing</strong><br>Independent testing based on agreed scenarios.</div>
+        <div class="step"><strong>3. Detailed report</strong><br>Clear documentation of findings and recommendations.</div>
+        <div class="step"><strong>4. Optional re-test</strong><br>Verification after fixes if needed.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>What you gain</h2>
+      <ul>
+        <li>Confidence before release</li>
+        <li>Fewer unpleasant surprises post-launch</li>
+        <li>Clear documentation of issues and risks</li>
+        <li>Stronger credibility toward your users</li>
+        <li>An external quality checkpoint</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h2>Contact me</h2>
+      <p>Let's be in touch and find out how I can help you.</p>
+      <a href="#">Get in touch</a>
+    </div>
+
+  </div>
+</body>
+</html>
