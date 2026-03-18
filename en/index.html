@@ -99,7 +99,16 @@ ul { margin-left: 20px; list-style-type: disc; }
 
 /* Steps / cards */
 .steps { display: grid; gap: 30px; grid-template-columns: 1fr; }
-@media(min-width: 700px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width: 700px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1000px) {
+  .hero-banner-wrapper {
+    height: 360px;
+  }
+}
 
 .step {
   background-color: var(--secondary);
