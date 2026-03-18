@@ -64,7 +64,10 @@ ul { margin-left: 20px; list-style-type: disc; }
 }
 
 .parallax.hero-banner {
-  min-height: 494px; /* match new hero image height */
+  min-height: auto;      /* remove fixed height */
+  height: auto;          /* let it scale naturally */
+  background-size: contain; /* show full image width */
+  background-repeat: no-repeat;
   background-position: center top;
 }
 
