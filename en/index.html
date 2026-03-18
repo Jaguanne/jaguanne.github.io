@@ -94,9 +94,9 @@ ul { margin-left: 20px; list-style-type: disc; }
   height: auto;
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;  /* stick to left edge */
-  transform: translateY(0); /* vertical only controlled via JS */
+  left: 0;
+  top: 50%;           /* start positioning from the middle */
+  transform: translateY(-50%); /* offset so the center of image aligns with container */
   will-change: transform;
 }
 
@@ -285,7 +285,7 @@ window.addEventListener('load', revealGainItems);
 const heroImg = document.querySelector('.hero-banner-img');
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  heroImg.style.transform = `translateY(${scrollY * 0.3}px)`; // slow vertical parallax
+  heroImg.style.transform = `translateY(${(-50 + scrollY * 0.3)}%)`; // slow vertical parallax
 });
 </script>
 
