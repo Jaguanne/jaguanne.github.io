@@ -241,14 +241,92 @@ footer a.button:hover {
 <!-- What you gain -->
 <section id="gain">
   <h2>What you gain</h2>
-  <div class="gain-cards">
-    <div class="gain-card">Confidence before release</div>
-    <div class="gain-card">Fewer unpleasant surprises post-launch</div>
-    <div class="gain-card">Clear documentation of issues and risks</div>
-    <div class="gain-card">Stronger credibility toward your users</div>
-    <div class="gain-card">An external quality checkpoint</div>
+  <div class="gain-list">
+    <div class="gain-item">
+      <div class="gain-number">1</div>
+      <p>Confidence before release</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">2</div>
+      <p>Fewer unpleasant surprises post-launch</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">3</div>
+      <p>Clear documentation of issues and risks</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">4</div>
+      <p>Stronger credibility toward your users</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">5</div>
+      <p>An external quality checkpoint</p>
+    </div>
   </div>
 </section>
+
+<style>
+/* Gain section */
+.gain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 40px;
+}
+@media(min-width: 700px) {
+  .gain-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.gain-item {
+  background-color: var(--secondary);
+  padding: 30px 20px;
+  border-radius: 15px;
+  flex: 1 1 calc(48% - 10px);
+  min-width: 220px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.gain-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gain-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--contrast);
+  margin-bottom: 15px;
+}
+.gain-item p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+</style>
+
+<script>
+// Reveal animation for gain items
+const gainItems = document.querySelectorAll('.gain-item');
+function revealGainItems() {
+  const windowBottom = window.innerHeight + window.scrollY;
+  gainItems.forEach(item => {
+    const itemTop = item.offsetTop;
+    if(windowBottom > itemTop + 50) {
+      item.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', revealGainItems);
+window.addEventListener('load', revealGainItems);
+</script>
 
 <!-- How it works -->
 <section id="how">
