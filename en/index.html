@@ -66,7 +66,7 @@ ul { margin-left: 20px; list-style-type: disc; }
 /* Hero image */
 .hero-banner-wrapper {
   width: 100%;
-  height: 500px; /* fixed visible height */
+  height: 320px; /* better fit for 1577x378 ratio */
   overflow: hidden;
   position: relative;
 }
@@ -74,11 +74,10 @@ ul { margin-left: 20px; list-style-type: disc; }
 .hero-banner {
   width: 100%;
   height: 100%;
-  background-image: url('/my-eyes-lime-black-2.jpg');
-  background-size: cover; /* fills container edge-to-edge */
-  background-position: center center;
+  background-image: url('/my-eyes-lime-black-3.jpg'); /* updated image */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  position: relative;
 }
 
 /* Parallax images (other sections) */
@@ -275,19 +274,6 @@ function revealGainItems() {
 window.addEventListener('scroll', revealGainItems);
 window.addEventListener('load', revealGainItems);
 
-// Hero parallax scroll
-const hero = document.querySelector('.hero-banner');
-const heroWrapper = document.querySelector('.hero-banner-wrapper');
-const heroOffset = heroWrapper.offsetTop;
-
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  if(scrollY > heroOffset) {
-    hero.style.backgroundPositionY = `${-((scrollY - heroOffset) * 0.3)}px`;
-  } else {
-    hero.style.backgroundPositionY = 'center';
-  }
-});
 </script>
 
 </body>
