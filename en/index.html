@@ -66,17 +66,16 @@ ul { margin-left: 20px; list-style-type: disc; }
 /* Hero image */
 .hero-banner-wrapper {
   width: 100%;
+  height: 500px; /* fixed visible height */
   overflow: hidden;
   position: relative;
-  height: auto;
-  min-height: 400px;
 }
 
 .hero-banner {
   width: 100%;
   height: 100%;
   background-image: url('/my-eyes-lime-black-2.jpg');
-  background-size: 100% auto; /* full width, keep aspect ratio */
+  background-size: cover; /* fills container edge-to-edge */
   background-position: center center;
   background-repeat: no-repeat;
   position: relative;
@@ -284,7 +283,6 @@ const heroOffset = heroWrapper.offsetTop;
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   if(scrollY > heroOffset) {
-    // Parallax effect after reaching top
     hero.style.backgroundPositionY = `${-((scrollY - heroOffset) * 0.3)}px`;
   } else {
     hero.style.backgroundPositionY = 'center';
