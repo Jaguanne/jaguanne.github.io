@@ -63,22 +63,6 @@ ul { margin-left: 20px; list-style-type: disc; }
   position: relative;
 }
 
-/* Hero image wrapper */
-.hero-banner-wrapper {
-  width: 100%;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  background-color: var(--primary); /* fallback color */
-}
-
-/* Image itself */
-.hero-banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .parallax::before {
   content: "";
   position: absolute;
@@ -89,13 +73,33 @@ ul { margin-left: 20px; list-style-type: disc; }
 /* Hero header */
 .hero-text {
   background-color: var(--primary);
-  padding: 120px 20px;
+  padding: 80px 20px 40px 20px;
   text-align: center;
 }
 
 .hero-text h1 { font-size: 3rem; margin: 0; }
 .hero-text h1 .contrast { color: var(--contrast); }
 .hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
+
+/* Hero image wrapper for parallax effect */
+.hero-banner-wrapper {
+  width: 100%;
+  overflow: hidden;
+  height: 300px; /* reduced height */
+  position: relative;
+}
+
+.hero-banner-img {
+  width: 100%;
+  max-width: 1577px;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  will-change: transform;
+}
 
 /* Steps / cards */
 .steps { display: grid; gap: 30px; grid-template-columns: 1fr; }
@@ -116,10 +120,6 @@ ul { margin-left: 20px; list-style-type: disc; }
   gap: 20px;
   margin-top: 40px;
 }
-@media(min-width:700px) { 
-  .gain-list { flex-direction: column; gap: 20px; } 
-}
-
 .gain-item {
   background-color: var(--secondary);
   padding: 20px 15px;
@@ -131,9 +131,7 @@ ul { margin-left: 20px; list-style-type: disc; }
   transition: transform 0.6s ease, opacity 0.6s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
-
 .gain-item.visible { opacity: 1; transform: translateY(0); }
-
 .gain-number {
   font-size: 2rem;
   font-weight: 700;
@@ -141,12 +139,7 @@ ul { margin-left: 20px; list-style-type: disc; }
   min-width: 40px;
   text-align: center;
 }
-
-.gain-item p {
-  font-size: 1.1rem;
-  margin: 0;
-  flex: 1;
-}
+.gain-item p { font-size: 1.1rem; margin: 0; flex: 1; }
 
 /* Footer */
 footer { text-align: center; padding: 50px 20px; background-color: var(--primary); }
@@ -170,7 +163,7 @@ footer a.button:hover { background-color: var(--text); }
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
 
-<!-- Hero Image using <img> -->
+<!-- Hero Image with parallax -->
 <div class="hero-banner-wrapper">
   <img src="/my-eyes-lime-black-2.jpg" alt="FreshEyes Hero Image" class="hero-banner-img">
 </div>
@@ -193,26 +186,11 @@ footer a.button:hover { background-color: var(--text); }
 <section id="gain">
   <h2>What you gain</h2>
   <div class="gain-list">
-    <div class="gain-item">
-      <div class="gain-number">1</div>
-      <p>Confidence before release</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">2</div>
-      <p>Fewer unpleasant surprises post-launch</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">3</div>
-      <p>Clear documentation of issues and risks</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">4</div>
-      <p>Stronger credibility toward your users</p>
-    </div>
-    <div class="gain-item">
-      <div class="gain-number">5</div>
-      <p>An external quality checkpoint</p>
-    </div>
+    <div class="gain-item"><div class="gain-number">1</div><p>Confidence before release</p></div>
+    <div class="gain-item"><div class="gain-number">2</div><p>Fewer unpleasant surprises post-launch</p></div>
+    <div class="gain-item"><div class="gain-number">3</div><p>Clear documentation of issues and risks</p></div>
+    <div class="gain-item"><div class="gain-number">4</div><p>Stronger credibility toward your users</p></div>
+    <div class="gain-item"><div class="gain-number">5</div><p>An external quality checkpoint</p></div>
   </div>
 </section>
 
@@ -303,6 +281,13 @@ function revealGainItems() {
 }
 window.addEventListener('scroll', revealGainItems);
 window.addEventListener('load', revealGainItems);
+
+// Simple parallax for hero image
+const heroImg = document.querySelector('.hero-banner-img');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  heroImg.style.transform = `translate(-50%, ${scrollY * 0.3}px)`; // slow vertical parallax
+});
 </script>
 
 </body>
