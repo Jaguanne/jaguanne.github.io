@@ -81,24 +81,22 @@ ul { margin-left: 20px; list-style-type: disc; }
 .hero-text h1 .contrast { color: var(--contrast); }
 .hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
 
-/* Hero image wrapper */
-.hero-banner-wrapper {
-  width: 100%;
-  height: 494px; /* match the actual image height */
-  overflow: hidden; /* keeps the image inside the wrapper */
+/* Hero image as parallax */
+.hero-banner {
+  min-height: 400px;
+  background-image: url('/my-eyes-lime-black-2.jpg');
+  background-size: cover;
+  background-position: center center; /* focus mid Y axis */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
-  background-color: var(--primary); /* fallback */
 }
 
-/* Image itself */
-.hero-banner-img {
-  width: 100%;
-  height: auto;
+.hero-banner::before {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  will-change: transform;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(26,42,47,0.5);
 }
 
 /* Steps / cards */
@@ -163,10 +161,8 @@ footer a.button:hover { background-color: var(--text); }
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
 
-<!-- Hero Image with parallax -->
-<div class="hero-banner-wrapper">
-  <img src="/my-eyes-lime-black-2.jpg" alt="FreshEyes Hero Image" class="hero-banner-img">
-</div>
+<!-- Hero Image as parallax like other sections -->
+<div class="parallax hero-banner"></div>
 
 <!-- Who is this for -->
 <section id="who">
@@ -281,13 +277,6 @@ function revealGainItems() {
 }
 window.addEventListener('scroll', revealGainItems);
 window.addEventListener('load', revealGainItems);
-
-// Simple parallax for hero image
-const heroImg = document.querySelector('.hero-banner-img');
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  heroImg.style.transform = `translateY(${(-50 + scrollY * 0.3)}%)`;
-});
 </script>
 
 </body>
