@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    const lang = navigator.language || navigator.userLanguage;
+    if (lang.startsWith('fi')) {
+      window.location.href = '/fi/';
+    } else {
+      window.location.href = '/en/';
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+  <p>
+    If nothing happens:
+    <a href="/en/">English</a> |
+    <a href="/fi/">Suomi</a>
+  </p>
+</body>
+</html>
