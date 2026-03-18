@@ -63,12 +63,20 @@ ul { margin-left: 20px; list-style-type: disc; }
   position: relative;
 }
 
-.parallax.hero-banner {
-  min-height: auto;      /* remove fixed height */
-  height: auto;          /* let it scale naturally */
-  background-size: contain; /* show full image width */
-  background-repeat: no-repeat;
-  background-position: center top;
+/* Hero image wrapper */
+.hero-banner-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary); /* fallback color */
+}
+
+/* Image itself */
+.hero-banner-img {
+  width: 100%;
+  max-width: 1577px; /* original width */
+  height: auto;
+  display: block;
 }
 
 .parallax::before {
@@ -162,8 +170,10 @@ footer a.button:hover { background-color: var(--text); }
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
 
-<!-- Hero Image -->
-<div class="hero-banner" style="background-image: url('/my-eyes-lime-black-2.jpg');"></div>
+<!-- Hero Image using <img> -->
+<div class="hero-banner-wrapper">
+  <img src="/my-eyes-lime-black-2.jpg" alt="FreshEyes Hero Image" class="hero-banner-img">
+</div>
 
 <!-- Who is this for -->
 <section id="who">
