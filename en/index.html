@@ -85,19 +85,18 @@ ul { margin-left: 20px; list-style-type: disc; }
 .hero-banner-wrapper {
   width: 100%;
   overflow: hidden;
-  height: 300px; /* reduced height */
+  height: 300px; /* same as before */
   position: relative;
 }
 
 .hero-banner-img {
   width: 100%;
-  max-width: 1577px;
   height: auto;
   display: block;
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;  /* stick to left edge */
+  transform: translateY(0); /* vertical only controlled via JS */
   will-change: transform;
 }
 
@@ -286,7 +285,7 @@ window.addEventListener('load', revealGainItems);
 const heroImg = document.querySelector('.hero-banner-img');
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  heroImg.style.transform = `translate(-50%, ${scrollY * 0.3}px)`; // slow vertical parallax
+  heroImg.style.transform = `translateY(${scrollY * 0.3}px)`; // slow vertical parallax
 });
 </script>
 
