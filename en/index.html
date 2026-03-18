@@ -62,11 +62,12 @@
       animation: fadeIn 1s forwards 0.5s;
     }
 
-    /* Hero image placeholder */
+    /* Hero image */
     .hero-image {
       width: 100%;
       max-height: 400px;
-      background-color: var(--secondary);
+      object-fit: cover;
+      border-radius: 10px;
       margin-top: 40px;
       opacity: 0;
       animation: fadeIn 1s forwards 1s;
@@ -101,7 +102,6 @@
     /* Images inside sections */
     .section-image {
       width: 100%;
-      max-width: 600px;
       height: auto;
       margin: 20px 0;
       border-radius: 10px;
@@ -110,7 +110,7 @@
       animation: fadeIn 1s forwards;
     }
 
-    /* Simple fade-in animation */
+    /* Fade-in animation */
     @keyframes fadeIn {
       to { opacity: 1; }
     }
@@ -164,7 +164,7 @@
 <header>
   <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
-  <div class="hero-image">[Hero image here]</div>
+  <img class="hero-image" src="my-eyes-lime-black.jpg" alt="Hero image">
 </header>
 
 <section id="who">
@@ -175,13 +175,13 @@
     <li>Startups needing external validation</li>
     <li>Product owners who want structured feedback from outside the team</li>
   </ul>
-  <img class="section-image" src="[3:2 image placeholder]" alt="Team working together">
+  <img class="section-image" src="FEST-1.png" alt="Team working together">
 </section>
 
 <section id="why">
   <h2>Why external testing matters</h2>
   <p>Developers and other internal team members know the product too well, which causes "blind spots" to appear. People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration. External software testing adds objectivity, structure, and more realistic user perspective before your product reaches customers.</p>
-  <img class="section-image" src="[3:2 image placeholder]" alt="Testing perspective illustration">
+  <img class="section-image" src="FEST-4.png" alt="Testing perspective illustration">
 </section>
 
 <section id="what">
@@ -207,7 +207,7 @@
     <li>Edge cases</li>
     <li>Error handling</li>
   </ul>
-  <img class="section-image" src="[3:2 image placeholder]" alt="Software testing illustration">
+  <img class="section-image" src="FEST-3.png" alt="Software testing illustration">
 </section>
 
 <section id="how">
