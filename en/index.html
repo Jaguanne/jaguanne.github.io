@@ -14,7 +14,7 @@
   --contrast: #BEF812;
 }
 
-/* General */
+/* General body styles */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -29,7 +29,9 @@ a {
   text-decoration: none;
   transition: color 0.3s;
 }
-a:hover { color: var(--secondary); }
+a:hover {
+  color: var(--secondary);
+}
 
 /* Sections */
 section {
@@ -38,8 +40,9 @@ section {
   margin: auto;
   background-color: var(--primary);
   border-radius: 15px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
+
 section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
@@ -53,41 +56,79 @@ section h2::after {
   background: var(--contrast);
   margin-top: 10px;
 }
-ul { margin-left: 20px; list-style-type: disc; }
-
-/* Hero section */
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-  background-color: var(--primary);
-  border-radius: 15px;
-  margin: 40px 20px 80px;
-}
-.hero h1 {
-  font-size: 3rem;
-  margin: 0 0 20px;
-}
-.hero h1 .contrast { color: var(--contrast); }
-.hero p { font-size: 1.2rem; max-width: 700px; margin: auto 0; }
-
-/* Hero image */
-.hero-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 15px;
-  margin: 40px 0 0;
+ul {
+  margin-left: 20px;
+  list-style-type: disc;
 }
 
-/* Parallax / section images */
+/* Parallax images */
 .parallax {
   width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  object-position: center;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+.parallax::before {
+  content: "";
+  position: absolute;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(26,42,47,0.5); /* overlay for readability */
+}
+
+/* Hero image section */
+.hero {
+  width: 100%;
+  height: 400px;
+  background-image: url('/my-eyes-lime-black.jpg');
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+}
+.hero-text {
+  max-width: 900px;
+  margin: -100px auto 0 auto;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: var(--primary);
   border-radius: 15px;
-  margin: 40px 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.hero-text h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+.hero-text h1 .contrast {
+  color: var(--contrast);
+}
+.hero-text p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+/* Steps / cards */
+.steps {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+}
+@media(min-width: 700px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.step {
+  background-color: var(--secondary);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 /* Gain section */
@@ -98,7 +139,11 @@ ul { margin-left: 20px; list-style-type: disc; }
   margin-top: 40px;
 }
 @media(min-width: 700px) {
-  .gain-list { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
+  .gain-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 .gain-item {
   background-color: var(--secondary);
@@ -113,41 +158,28 @@ ul { margin-left: 20px; list-style-type: disc; }
   transition: transform 0.6s ease, opacity 0.6s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
-.gain-item.visible { opacity: 1; transform: translateY(0); }
+.gain-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 .gain-number {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--contrast);
   margin-bottom: 15px;
 }
-.gain-item p { font-size: 1.1rem; margin: 0; }
+.gain-item p {
+  font-size: 1.1rem;
+  margin: 0;
+}
 
-/* Steps / How it works */
-.steps {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr;
-}
-@media(min-width: 700px) {
-  .steps { grid-template-columns: repeat(2, 1fr); }
-}
-.step {
-  background-color: var(--secondary);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.step:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
-
-/* Contact */
-footer, #contact {
+/* Footer */
+footer {
   text-align: center;
   padding: 50px 20px;
   background-color: var(--primary);
-  border-radius: 15px;
 }
-footer a.button, #contact a.button {
+footer a.button {
   display: inline-block;
   padding: 15px 30px;
   border-radius: 50px;
@@ -157,19 +189,21 @@ footer a.button, #contact a.button {
   margin-top: 20px;
   transition: background 0.3s;
 }
-footer a.button:hover, #contact a.button:hover { background-color: var(--text); }
+footer a.button:hover {
+  background-color: var(--text);
+}
 </style>
 </head>
 <body>
 
 <!-- Hero -->
-<div class="hero">
+<div class="hero"></div>
+<div class="hero-text">
   <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
-  <img class="hero-image" src="/my-eyes-lime-black.jpg" alt="Hero image">
 </div>
 
-<!-- Who is this for -->
+<!-- Who -->
 <section id="who">
   <h2>Who is this for</h2>
   <ul>
@@ -181,16 +215,16 @@ footer a.button:hover, #contact a.button:hover { background-color: var(--text); 
 </section>
 
 <!-- FEST-1 -->
-<img class="parallax" src="/FEST-1.png" alt="FEST-1">
+<div class="parallax" style="background-image: url('/FEST-1.png');"></div>
 
-<!-- Why external testing matters -->
+<!-- Why -->
 <section id="why">
   <h2>Why external testing matters</h2>
   <p>Developers and other internal team members know the product too well, which causes "blind spots" to appear. People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration. External software testing adds objectivity, structure, and more realistic user perspective before your product reaches customers.</p>
 </section>
 
 <!-- FEST-4 -->
-<img class="parallax" src="/FEST-4.png" alt="FEST-4">
+<div class="parallax" style="background-image: url('/FEST-4.png');"></div>
 
 <!-- What I test -->
 <section id="what">
@@ -219,17 +253,32 @@ footer a.button:hover, #contact a.button:hover { background-color: var(--text); 
 </section>
 
 <!-- FEST-3 -->
-<img class="parallax" src="/FEST-3.png" alt="FEST-3">
+<div class="parallax" style="background-image: url('/FEST-3.png');"></div>
 
 <!-- What you gain -->
 <section id="gain">
   <h2>What you gain</h2>
   <div class="gain-list">
-    <div class="gain-item"><div class="gain-number">1</div><p>Confidence before release</p></div>
-    <div class="gain-item"><div class="gain-number">2</div><p>Fewer unpleasant surprises post-launch</p></div>
-    <div class="gain-item"><div class="gain-number">3</div><p>Clear documentation of issues and risks</p></div>
-    <div class="gain-item"><div class="gain-number">4</div><p>Stronger credibility toward your users</p></div>
-    <div class="gain-item"><div class="gain-number">5</div><p>An external quality checkpoint</p></div>
+    <div class="gain-item">
+      <div class="gain-number">1</div>
+      <p>Confidence before release</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">2</div>
+      <p>Fewer unpleasant surprises post-launch</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">3</div>
+      <p>Clear documentation of issues and risks</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">4</div>
+      <p>Stronger credibility toward your users</p>
+    </div>
+    <div class="gain-item">
+      <div class="gain-number">5</div>
+      <p>An external quality checkpoint</p>
+    </div>
   </div>
 </section>
 
@@ -237,10 +286,22 @@ footer a.button:hover, #contact a.button:hover { background-color: var(--text); 
 <section id="how">
   <h2>How it works</h2>
   <div class="steps">
-    <div class="step"><h3>1. Alignment call</h3><p>Together we define scope, user scenarios, roles, and timetable for testing the software.</p></div>
-    <div class="step"><h3>2. Structured testing</h3><p>I perform the software testing independently, based on agreed scenarios.</p></div>
-    <div class="step"><h3>3. Detailed report</h3><p>After testing, I will provide you with clear documentation of findings and recommendations.</p></div>
-    <div class="step"><h3>4. Optional re-test</h3><p>If need be, I can do another round of testing for verification after fixes have been deployed.</p></div>
+    <div class="step">
+      <h3>1. Alignment call</h3>
+      <p>Together we define scope, user scenarios, roles, and timetable for testing the software.</p>
+    </div>
+    <div class="step">
+      <h3>2. Structured testing</h3>
+      <p>I perform the software testing independently, based on agreed scenarios.</p>
+    </div>
+    <div class="step">
+      <h3>3. Detailed report</h3>
+      <p>After testing, I will provide you with clear documentation of findings and recommendations.</p>
+    </div>
+    <div class="step">
+      <h3>4. Optional re-test</h3>
+      <p>If need be, I can do another round of testing for verification after fixes have been deployed.</p>
+    </div>
   </div>
 </section>
 
@@ -262,7 +323,9 @@ function revealGainItems() {
   const windowBottom = window.innerHeight + window.scrollY;
   gainItems.forEach(item => {
     const itemTop = item.offsetTop;
-    if(windowBottom > itemTop + 50) { item.classList.add('visible'); }
+    if(windowBottom > itemTop + 50) {
+      item.classList.add('visible');
+    }
   });
 }
 window.addEventListener('scroll', revealGainItems);
