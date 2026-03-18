@@ -81,22 +81,23 @@ ul { margin-left: 20px; list-style-type: disc; }
 .hero-text h1 .contrast { color: var(--contrast); }
 .hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
 
-/* Hero image wrapper for parallax effect */
+/* Hero image wrapper */
 .hero-banner-wrapper {
   width: 100%;
-  overflow: hidden;
-  height: 300px; /* same as before */
+  height: 494px; /* match the actual image height */
+  overflow: hidden; /* keeps the image inside the wrapper */
   position: relative;
+  background-color: var(--primary); /* fallback */
 }
 
+/* Image itself */
 .hero-banner-img {
   width: 100%;
   height: auto;
-  display: block;
   position: absolute;
+  top: 50%;
   left: 0;
-  top: 50%;           /* start positioning from the middle */
-  transform: translateY(-50%); /* offset so the center of image aligns with container */
+  transform: translateY(-50%);
   will-change: transform;
 }
 
@@ -285,7 +286,7 @@ window.addEventListener('load', revealGainItems);
 const heroImg = document.querySelector('.hero-banner-img');
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  heroImg.style.transform = `translateY(${(-50 + scrollY * 0.3)}%)`; // slow vertical parallax
+  heroImg.style.transform = `translateY(${(-50 + scrollY * 0.3)}%)`;
 });
 </script>
 
