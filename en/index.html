@@ -25,34 +25,50 @@ body {
   position: relative;
 }
 
-/* subtle grid overlay */
+/* subtle grid texture */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
+  z-index: 0;
 }
 
-a { color: var(--contrast); text-decoration: none; transition: 0.3s; }
+a { color: var(--contrast); text-decoration: none; transition: color 0.3s; }
 a:hover { color: var(--secondary); }
 
-/* sections */
+/* Sections */
 section {
   padding: 80px 20px;
   max-width: 900px;
-  margin: 60px auto;
+  margin: auto;
+  margin-bottom: 60px;
   background: linear-gradient(180deg, #0D1B1E 0%, #13272B 100%);
-  border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
   position: relative;
+  z-index: 1;
+}
+
+/* fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 section h2 {
   font-size: 2rem;
   margin-bottom: 20px;
+  font-weight: 700;
   letter-spacing: -0.5px;
 }
 
@@ -65,25 +81,28 @@ section h2::after {
   margin-top: 10px;
 }
 
-section p { max-width: 650px; }
+section p {
+  max-width: 650px;
+}
 
 ul { margin-left: 20px; }
 
-/* hero */
+/* Hero */
 .hero-text {
-  background: linear-gradient(180deg, #0D1B1E, #13272B);
-  padding: 80px 20px 40px;
+  background: linear-gradient(180deg, #0D1B1E 0%, #13272B 100%);
+  padding: 80px 20px 40px 20px;
   text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .hero-text h1 { font-size: 3rem; margin: 0; }
 .hero-text h1 .contrast { color: var(--contrast); }
-.hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0; }
+.hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
 
-/* hero image */
+/* Hero image */
 .hero-banner-wrapper {
   width: 100%;
-  height: 340px;
+  height: 320px;
   overflow: hidden;
   position: relative;
 }
@@ -94,31 +113,18 @@ ul { margin-left: 20px; }
   background-image: url('/my-eyes-lime-black-3.jpg');
   background-size: cover;
   background-position: center;
-  position: relative;
+  background-repeat: no-repeat;
 }
 
-/* glow effect */
-.hero-banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(190,248,18,0.15), transparent 70%);
-  animation: pulse 6s infinite ease-in-out;
-}
-
-@keyframes pulse {
-  0%,100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-}
-
-/* parallax (softened) */
+/* Parallax (unchanged) */
 .parallax {
   width: 100%;
   min-height: 400px;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
-  transform: scale(1.05);
 }
 
 .parallax::before {
@@ -128,52 +134,41 @@ ul { margin-left: 20px; }
   background: rgba(26,42,47,0.5);
 }
 
-/* cards */
-.steps {
-  display: grid;
-  gap: 30px;
-}
-
+/* Steps */
+.steps { display: grid; gap: 30px; grid-template-columns: 1fr; }
 @media(min-width: 700px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .hero-banner-wrapper { height: 360px; }
 }
 
 .step {
   background: linear-gradient(180deg, #325055, #2A454A);
-  padding: 20px;
-  border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.06);
-  transition: 0.3s;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: all 0.3s ease;
 }
-
 .step:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.45);
 }
 
-/* gain section */
-.gain-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 40px;
-}
+/* Gain section */
+.gain-list { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
 
 .gain-item {
   background: linear-gradient(180deg, #325055, #2A454A);
+  border: 1px solid rgba(255,255,255,0.06);
   padding: 20px 15px;
   display: flex;
   align-items: center;
   gap: 20px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.06);
   opacity: 0;
   transform: translateY(30px);
-  transition: 0.6s ease;
-}
-
-.gain-item:hover {
-  transform: translateY(-4px) scale(1.01);
+  transition: all 0.6s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
 .gain-item.visible {
@@ -181,13 +176,21 @@ ul { margin-left: 20px; }
   transform: translateY(0);
 }
 
+.gain-item:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
 .gain-number {
   font-size: 2rem;
   font-weight: 700;
   color: var(--contrast);
+  min-width: 40px;
+  text-align: center;
 }
 
-/* buttons */
+.gain-item p { font-size: 1.1rem; margin: 0; flex: 1; }
+
+/* Button */
 a.button {
   display: inline-block;
   padding: 15px 30px;
@@ -195,7 +198,8 @@ a.button {
   color: var(--primary);
   font-weight: 600;
   margin-top: 20px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(190,248,18,0);
 }
 
 a.button:hover {
@@ -203,26 +207,14 @@ a.button:hover {
   box-shadow: 0 0 20px rgba(190,248,18,0.4);
 }
 
-/* footer */
+/* Footer */
 footer {
   text-align: center;
   padding: 60px 20px;
-  margin-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.08);
   background: linear-gradient(180deg, #0D1B1E, #13272B);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 40px;
 }
-
-/* fade-in animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.6s ease;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 </style>
 </head>
 
@@ -233,46 +225,94 @@ footer {
   <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
 </div>
 
-<div class="hero-banner-wrapper">
+<div class="hero-banner-wrapper fade-in">
   <div class="hero-banner"></div>
 </div>
 
-<section class="fade-in">
+<section id="who" class="fade-in">
   <h2>Who is this for</h2>
   <ul>
-    <li>Software developers and development teams</li>
-    <li>Startups preparing for release</li>
-    <li>Product owners wanting external feedback</li>
+    <li>Software developers and development teams wanting a fresh view of their product</li>
+    <li>Digital product developers preparing for a release</li>
+    <li>Startups needing external validation</li>
+    <li>Product owners who want structured feedback from outside the team</li>
   </ul>
 </section>
 
 <div class="parallax" style="background-image: url('/FEST-1.png');"></div>
 
-<section class="fade-in">
+<section id="gain" class="fade-in">
   <h2>What you gain</h2>
   <div class="gain-list">
     <div class="gain-item"><div class="gain-number">1</div><p>Confidence before release</p></div>
-    <div class="gain-item"><div class="gain-number">2</div><p>Fewer surprises</p></div>
-    <div class="gain-item"><div class="gain-number">3</div><p>Clear documentation</p></div>
-    <div class="gain-item"><div class="gain-number">4</div><p>Stronger credibility</p></div>
+    <div class="gain-item"><div class="gain-number">2</div><p>Fewer unpleasant surprises post-launch</p></div>
+    <div class="gain-item"><div class="gain-number">3</div><p>Clear documentation of issues and risks</p></div>
+    <div class="gain-item"><div class="gain-number">4</div><p>Stronger credibility toward your users</p></div>
+    <div class="gain-item"><div class="gain-number">5</div><p>An external quality checkpoint</p></div>
   </div>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-4.png');"></div>
+
+<section id="why" class="fade-in">
+  <h2>Why external testing matters</h2>
+  <p>Developers and other internal team members know the product too well, which causes "blind spots" to appear. People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration. External software testing adds objectivity, structure, and more realistic user perspective before your product reaches customers.</p>
 </section>
 
 <div class="parallax" style="background-image: url('/FEST-3.png');"></div>
 
-<section class="fade-in">
+<section id="what" class="fade-in">
+  <h2>What I test</h2>
+  <p>The software testing I do is primarily based on agreed user scenarios and roles.</p>
+  <h3>Core user scenarios:</h3>
+  <ul>
+    <li>Key user journeys (e.g. sign-up, checkout, submission, settings)</li>
+    <li>Goal-based usage flows</li>
+    <li>Critical paths before release</li>
+  </ul>
+  <h3>User roles:</h3>
+  <ul>
+    <li>End user</li>
+    <li>Admin</li>
+    <li>Manager / other internal role</li>
+    <li>Other roles with different access rights</li>
+  </ul>
+  <h3>Additional focus:</h3>
+  <ul>
+    <li>Usability and clarity</li>
+    <li>Logical consistency</li>
+    <li>Edge cases</li>
+    <li>Error handling</li>
+  </ul>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-5.png');"></div>
+
+<section id="how" class="fade-in">
   <h2>How it works</h2>
   <div class="steps">
-    <div class="step fade-in"><h3>1. Alignment</h3><p>Define scope</p></div>
-    <div class="step fade-in"><h3>2. Testing</h3><p>Independent execution</p></div>
-    <div class="step fade-in"><h3>3. Report</h3><p>Clear findings</p></div>
-    <div class="step fade-in"><h3>4. Re-test</h3><p>Optional verification</p></div>
+    <div class="step fade-in">
+      <h3>1. Alignment call</h3>
+      <p>Together we define scope, user scenarios, roles, and timetable for testing the software.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>2. Structured testing</h3>
+      <p>I perform the software testing independently, based on agreed scenarios.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>3. Detailed report</h3>
+      <p>After testing, I will provide you with clear documentation of findings and recommendations.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>4. Optional re-test</h3>
+      <p>If need be, I can do another round of testing for verification after fixes have been deployed.</p>
+    </div>
   </div>
 </section>
 
-<section class="fade-in">
-  <h2>Contact</h2>
-  <p>Let's be in touch and find out how I can help you.</p>
+<section id="contact" class="fade-in">
+  <h2>Contact me</h2>
+  <p>Let's be in touch and find out how I can help you!</p>
   <a href="mailto:your.email@example.com" class="button">Get in touch</a>
 </section>
 
@@ -281,15 +321,21 @@ footer {
 </footer>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
+// reveal animations
+const elements = document.querySelectorAll('.fade-in, .gain-item');
+
+function reveal() {
+  const trigger = window.innerHeight + window.scrollY;
+
+  elements.forEach(el => {
+    if (trigger > el.offsetTop + 60) {
+      el.classList.add('visible');
     }
   });
-});
+}
 
-document.querySelectorAll('.fade-in, .gain-item').forEach(el => observer.observe(el));
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
 </script>
 
 </body>
