@@ -73,10 +73,11 @@ ul { margin-left: 20px; list-style-type: disc; }
 .hero-banner {
   width: 100%;
   height: 100%;
-  background-image: url('/my-eyes-lime-black-3.jpg'); /* updated image */
-  background-size: cover;
+  background-image: url('/my-eyes-lime-black-3.jpg');
+  background-size: contain; /* show full image */
   background-position: center;
   background-repeat: no-repeat;
+  background-color: var(--primary); /* fills empty space */
 }
 
 /* Parallax images (other sections) */
