@@ -38,12 +38,37 @@ body::before {
   z-index: 0;
 }
 
-/* floating nav */
-.side-nav {
+/* floating nav with language links */
+.side-nav-wrapper {
   position: fixed;
   top: 60px;
   left: 20px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* language links */
+.lang-links {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lang-links a {
+  font-size: 0.9rem;
+  color: rgba(243,245,247,0.6);
+  transition: all 0.25s ease;
+}
+
+.lang-links a:hover {
+  color: var(--contrast);
+  font-weight: 600;
+}
+
+/* nav links */
+.side-nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -171,7 +196,7 @@ ul { margin-left: 20px; }
 
 /* hide nav on small screens */
 @media(max-width: 900px) {
-  .side-nav { display: none; }
+  .side-nav-wrapper { display: none; }
 }
 
 .step {
@@ -251,15 +276,21 @@ footer {
 
 <body>
 
-<!-- floating nav -->
-<nav class="side-nav">
-  <a href="#who">Who</a>
-  <a href="#gain">Gain</a>
-  <a href="#why">Why</a>
-  <a href="#what">What</a>
-  <a href="#how">How</a>
-  <a href="#contact">Contact</a>
-</nav>
+<!-- floating nav + language -->
+<div class="side-nav-wrapper">
+  <div class="lang-links">
+    <a href="/en">EN</a>
+    <a href="/fi">FI</a>
+  </div>
+  <nav class="side-nav">
+    <a href="#who">Who</a>
+    <a href="#gain">Gain</a>
+    <a href="#why">Why</a>
+    <a href="#what">What</a>
+    <a href="#how">How</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
 
 <div class="hero-text fade-in">
   <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
@@ -362,38 +393,32 @@ footer {
 </footer>
 
 <script>
+// force scroll to top on load
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+
 // reveal animations
 const elements = document.querySelectorAll('.fade-in, .gain-item');
-
 function reveal() {
   const trigger = window.innerHeight + window.scrollY;
-
   elements.forEach(el => {
-    if (trigger > el.offsetTop + 60) {
-      el.classList.add('visible');
-    }
+    if (trigger > el.offsetTop + 60) el.classList.add('visible');
   });
 }
 
 // active nav highlight
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".side-nav a");
-
 function updateActiveNav() {
   let current = "";
-
   sections.forEach(section => {
     const sectionTop = section.offsetTop - 120;
-    if (window.scrollY >= sectionTop) {
-      current = section.getAttribute("id");
-    }
+    if (window.scrollY >= sectionTop) current = section.getAttribute("id");
   });
-
   navLinks.forEach(link => {
     link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + current) {
-      link.classList.add("active");
-    }
+    if (link.getAttribute("href") === "#" + current) link.classList.add("active");
   });
 }
 
@@ -401,7 +426,6 @@ window.addEventListener('scroll', () => {
   reveal();
   updateActiveNav();
 });
-
 window.addEventListener('load', () => {
   reveal();
   updateActiveNav();
