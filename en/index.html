@@ -414,7 +414,7 @@ function updateActiveNav() {
   let current = "";
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
-    if (rect.top <= 100) { // 100px from top of viewport
+    if (rect.top <= 200) {
       current = section.getAttribute("id");
     }
   });
