@@ -25,7 +25,7 @@ body {
   position: relative;
 }
 
-/* subtle grid texture */
+/* subtle grid */
 body::before {
   content: "";
   position: fixed;
@@ -41,6 +41,42 @@ body::before {
 a { color: var(--contrast); text-decoration: none; transition: color 0.3s; }
 a:hover { color: var(--secondary); }
 
+/* floating nav */
+.floating-nav {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.floating-nav a {
+  font-size: 0.85rem;
+  color: rgba(243,245,247,0.6);
+  transition: all 0.25s ease;
+}
+
+.floating-nav a:hover {
+  color: var(--contrast);
+  transform: translateX(-4px) scale(1.05);
+}
+
+.floating-nav a.active {
+  color: var(--contrast);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* hide on small screens */
+@media (max-width: 900px) {
+  .floating-nav {
+    display: none;
+  }
+}
+
 /* Sections */
 section {
   padding: 80px 20px;
@@ -54,7 +90,7 @@ section {
   z-index: 1;
 }
 
-/* fade-in animation */
+/* fade-in */
 .fade-in {
   opacity: 0;
   transform: translateY(25px);
@@ -116,7 +152,7 @@ ul { margin-left: 20px; }
   background-repeat: no-repeat;
 }
 
-/* Parallax (unchanged) */
+/* Parallax */
 .parallax {
   width: 100%;
   min-height: 400px;
@@ -155,7 +191,7 @@ ul { margin-left: 20px; }
   box-shadow: 0 12px 26px rgba(0,0,0,0.45);
 }
 
-/* Gain section */
+/* Gain */
 .gain-list { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
 
 .gain-item {
@@ -219,6 +255,16 @@ footer {
 </head>
 
 <body>
+
+<!-- Floating nav -->
+<div class="floating-nav">
+  <a href="#who">Who</a>
+  <a href="#gain">Gain</a>
+  <a href="#why">Why</a>
+  <a href="#what">What</a>
+  <a href="#how">How</a>
+  <a href="#contact">Contact</a>
+</div>
 
 <div class="hero-text fade-in">
   <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
@@ -334,8 +380,37 @@ function reveal() {
   });
 }
 
-window.addEventListener('scroll', reveal);
-window.addEventListener('load', reveal);
+// active nav highlight
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.floating-nav a');
+
+function updateNav() {
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 200;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener('scroll', () => {
+  reveal();
+  updateNav();
+});
+
+window.addEventListener('load', () => {
+  reveal();
+  updateNav();
+});
 </script>
 
 </body>
