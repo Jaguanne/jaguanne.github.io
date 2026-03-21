@@ -115,16 +115,17 @@ a { color: var(--lime); text-decoration: none; }
 /* ── Hero ── */
 .hero {
     position: relative;
-    height: clamp(320px, 40vw, 520px);
+    min-height: 420px; /* reduced from 100vh */
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
 }
 
 .hero-image {
     position: absolute;
     inset: 0;
-    background: url('/my-eyes-lime-black-4.jpg') center center/cover no-repeat;
+    background: url('/my-eyes-lime-black-4.jpg') center center/contain no-repeat;
+    background-color: var(--bg);
 }
 
 .hero-image::after {
@@ -132,15 +133,15 @@ a { color: var(--lime); text-decoration: none; }
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.5) 40%, transparent 70%),
-        linear-gradient(to top, var(--bg) 0%, transparent 35%);
+        linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.4) 35%, transparent 60%),
+        linear-gradient(to top, var(--bg) 0%, transparent 25%);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 0 48px 48px;
-    max-width: 1000px;
+    padding: 0 48px;
+    max-width: 920px; /* widened */
 }
 
 .hero-eyebrow {
@@ -174,7 +175,7 @@ a { color: var(--lime); text-decoration: none; }
 .hero-sub {
     font-size: 18px;
     color: var(--text-dim);
-    max-width: 700px;
+    max-width: 640px; /* slightly wider */
     line-height: 1.7;
     margin-bottom: 40px;
     opacity: 0;
@@ -533,7 +534,7 @@ a { color: var(--lime); text-decoration: none; }
     .nav { padding: 16px 24px; }
     .nav-links { display: none; }
     .section { padding: 80px 24px; }
-    .hero-content { padding: 0 24px 32px; }
+    .hero-content { padding: 0 24px; }
     .audience-grid { grid-template-columns: 1fr; }
     .gains-grid { grid-template-columns: 1fr; }
     .what-columns { grid-template-columns: 1fr; }
