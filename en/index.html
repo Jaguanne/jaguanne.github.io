@@ -805,6 +805,14 @@ navToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('show');
     navToggle.classList.toggle('open');
 });
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('#nav-links-mobile a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('show');
+        navToggle.classList.remove('open');
+    });
+});
 </script>
 </body>
 </html>
