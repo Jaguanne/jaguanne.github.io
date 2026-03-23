@@ -139,6 +139,11 @@ a { color: var(--lime); text-decoration: none; }
     transition: all 0.3s var(--ease);
 }
 
+.nav-links-mobile a.nav-cta {
+    width: auto;
+    display: inline-block;
+}
+
 /* ── Hero ── */
 .hero {
     position: relative;
@@ -576,11 +581,37 @@ a { color: var(--lime); text-decoration: none; }
         padding-top: 0;
     }
     
-    .hero-image { position: relative; height: 300px; width: 100%; background-size: cover; }
-    .hero-image::after { background: linear-gradient(to top, var(--bg) 0%, transparent 50%); }
-    .hero-content { padding: 40px 24px; text-align: center; max-width: 100%; }
-    .hero-sub { margin: 0 auto 32px; }
-    .hero-actions { justify-content: center; flex-direction: column; }
+    .hero-image {
+        position: relative;
+        height: 300px;
+        width: 100%;
+        background-size: cover;
+    }
+    
+    .hero-image::after {
+        background: linear-gradient(to top, var(--bg) 0%, transparent 50%);
+    }
+    
+    .hero-content {
+        padding: 40px 24px;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .hero-sub {
+        margin: 0 auto 32px;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .hero-actions a {
+    width: auto;
+    max-width: 200px;
+    }
 
     .audience-grid { grid-template-columns: 1fr; }
     .gains-grid { grid-template-columns: 1fr; }
