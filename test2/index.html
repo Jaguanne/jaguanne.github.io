@@ -25,7 +25,9 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
+
 body {
     font-family: var(--font-body);
     background: var(--bg);
@@ -35,9 +37,11 @@ body {
     overflow-x: hidden;
 }
 
+::selection { background: var(--lime); color: var(--bg); }
+
 a { color: var(--lime); text-decoration: none; }
 
-/* ── Nav ── */
+/* ── Nav & Burger Menu ── */
 .nav {
     position: fixed;
     top: 0;
@@ -48,7 +52,7 @@ a { color: var(--lime); text-decoration: none; }
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(10, 18, 20, 0.85);
+    background: rgba(10, 18, 20, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
@@ -59,8 +63,10 @@ a { color: var(--lime); text-decoration: none; }
     font-size: 20px;
     font-weight: 600;
     color: var(--text);
+    letter-spacing: -0.5px;
     z-index: 1001;
 }
+
 .nav-brand span { color: var(--lime); }
 
 .nav-links {
@@ -75,181 +81,186 @@ a { color: var(--lime); text-decoration: none; }
     color: var(--text-dim);
     transition: color 0.3s;
 }
+
 .nav-links a:hover, .nav-links a.active { color: var(--lime); }
 
-/* Burger Menu Toggle */
-.menu-toggle {
+/* Burger Controls */
+.burger-check { display: none; }
+.burger-label {
     display: none;
-    flex-direction: column;
-    gap: 6px;
     cursor: pointer;
     z-index: 1001;
-}
-.menu-toggle span {
-    width: 28px;
-    height: 2px;
-    background: var(--text);
-    transition: 0.3s var(--ease);
+    width: 24px;
+    height: 18px;
+    position: relative;
 }
 
-/* ── Hero ── */
+.burger-label span, .burger-label span::before, .burger-label span::after {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    position: absolute;
+    transition: all 0.3s var(--ease);
+}
+
+.burger-label span::before { content: ''; top: -8px; }
+.burger-label span::after { content: ''; top: 8px; }
+
+/* ── Hero (Scaling Logic) ── */
 .hero {
     position: relative;
     width: 100%;
-    margin-top: 60px;
+    /* Maintain aspect ratio of image on desktop to ensure content scales WITH image */
+    aspect-ratio: 16 / 7; 
+    min-height: 400px;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--bg);
+    margin-top: 60px;
 }
 
 .hero-image {
     position: absolute;
     inset: 0;
-    background: url('/my-eyes-lime-black-4.jpg') center center/cover no-repeat;
+    background: url('/my-eyes-lime-black-4.jpg') center center/contain no-repeat;
+    background-color: var(--bg);
 }
 
 .hero-image::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.3) 40%, transparent 100%);
+    background: linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.4) 35%, transparent 60%);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 6% 48px;
-    max-width: 700px;
-}
-
-/* Scaling Desktop Logic */
-@media (min-width: 1024px) {
-    .hero {
-        aspect-ratio: 16 / 7; /* Adjust this to match your image's natural ratio */
-        min-height: 450px;
-        max-height: 700px;
-    }
-    .hero-image { background-size: contain; }
-    .hero-content {
-        /* This ensures the text scales with the height of the hero */
-        transform: scale(clamp(0.8, 1vw, 1.2));
-        transform-origin: left center;
-    }
+    padding: 0 5vw;
+    /* Use dynamic units so text shrinks as width shrinks */
+    width: 50%; 
 }
 
 .hero-eyebrow {
-    font-size: 12px;
-    letter-spacing: 4px;
+    font-size: clamp(10px, 1.2vw, 12px);
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--lime);
-    margin-bottom: 12px;
+    margin-bottom: 1.5vw;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease) 0.2s forwards;
 }
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 600;
+    font-size: clamp(24px, 4.5vw, 56px);
     line-height: 1.1;
-    letter-spacing: -2px;
-    margin-bottom: 16px;
+    margin-bottom: 2vw;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease) 0.4s forwards;
 }
+
+.hero h1 em { font-style: italic; color: var(--lime); font-weight: 400; }
 
 .hero-sub {
-    font-size: clamp(16px, 1.5vw, 18px);
+    font-size: clamp(14px, 1.6vw, 18px);
     color: var(--text-dim);
-    max-width: 500px;
-    margin-bottom: 32px;
+    line-height: 1.6;
+    margin-bottom: 2.5vw;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease) 0.6s forwards;
 }
 
-.hero-actions { display: flex; gap: 16px; }
+.hero-actions {
+    display: flex;
+    gap: 1.5vw;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease) 0.8s forwards;
+}
 
-/* ── Common Components ── */
-.btn-lime {
-    padding: 14px 32px;
-    background: var(--lime);
-    color: var(--bg);
-    font-weight: 600;
+.btn-lime, .btn-ghost {
+    padding: clamp(10px, 1.2vw, 14px) clamp(20px, 2.5vw, 32px);
+    font-size: clamp(12px, 1.1vw, 14px);
     border-radius: 8px;
-    transition: 0.3s;
+    transition: all 0.3s var(--ease);
+    white-space: nowrap;
 }
-.btn-lime:hover { box-shadow: 0 0 32px rgba(190, 248, 18, 0.35); transform: translateY(-2px); }
 
-.btn-ghost {
-    padding: 12px 24px;
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 8px;
-    transition: 0.3s;
-}
-.btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+.btn-lime { background: var(--lime); color: var(--bg); font-weight: 600; }
+.btn-ghost { border: 1px solid var(--border); color: var(--text); }
 
-/* ── Sections ── */
-.section { padding: 100px 48px; position: relative; }
-.section-alt { background: var(--bg-elevated); }
+/* ── Section Defaults ── */
+.section { padding: 100px 48px; }
 .container { max-width: 1200px; margin: 0 auto; }
 .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--lime); margin-bottom: 12px; }
 .section-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); font-weight: 600; margin-bottom: 20px; }
+.section-desc { color: var(--text-dim); font-size: 16px; max-width: 580px; margin-bottom: 48px; }
 
-/* ── Content Grids ── */
+/* ── Audience Grid ── */
 .audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .audience-card { padding: 24px; border-left: 2px solid var(--lime); background: var(--lime-dim); color: var(--text-dim); }
 
+/* ── Gains ── */
 .gains-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
-.gain-card { background: var(--bg-card); padding: 32px 20px; text-align: center; border: 1px solid var(--border); }
-.gain-number { font-family: var(--font-display); font-size: 32px; color: var(--lime); }
+.gain-card { background: var(--bg-card); padding: 32px 24px; text-align: center; border: 1px solid var(--border); }
+.gain-number { font-family: var(--font-display); font-size: 36px; color: var(--lime); }
 
-.why-split { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-.why-image img { width: 100%; border-radius: 12px; }
+/* ── Process ── */
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--border); gap: 1px; }
+.process-step { background: var(--bg-card); padding: 32px; }
 
-.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); border-radius: 12px; overflow: hidden; }
-.process-step { background: var(--bg-card); padding: 30px; }
-.process-num { font-size: 24px; color: var(--lime); opacity: 0.5; margin-bottom: 10px; }
+/* ── Animations ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-.footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border); }
-
-/* ── Responsive ── */
-@media (max-width: 1024px) {
-    .nav { padding: 15px 24px; }
-    .menu-toggle { display: flex; }
+/* ── Mobile Responsive ── */
+@media (max-width: 900px) {
+    .nav { padding: 16px 24px; }
     
+    /* Burger Logic */
+    .burger-label { display: block; }
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 100%;
+        width: 80%;
         height: 100vh;
-        background: var(--bg);
+        background: var(--bg-elevated);
         flex-direction: column;
         justify-content: center;
-        transition: 0.4s var(--ease);
+        transition: right 0.4s var(--ease);
         z-index: 1000;
+        border-left: 1px solid var(--border);
     }
 
-    .nav-links.active { right: 0; }
+    .burger-check:checked ~ .nav-links { right: 0; }
+    .burger-check:checked ~ .burger-label span { background: transparent; }
+    .burger-check:checked ~ .burger-label span::before { transform: rotate(45deg); top: 0; }
+    .burger-check:checked ~ .burger-label span::after { transform: rotate(-45deg); top: 0; }
 
-    /* Burger Animation */
-    .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .menu-toggle.active span:nth-child(2) { opacity: 0; }
-    .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .gains-grid { grid-template-columns: repeat(2, 1fr); }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .why-split { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-    .hero { flex-direction: column; min-height: auto; }
-    .hero-image { position: relative; height: 250px; }
-    .hero-content { padding: 40px 24px; text-align: center; }
+    /* Mobile Hero */
+    .hero { 
+        aspect-ratio: auto; 
+        flex-direction: column; 
+        min-height: auto; 
+    }
+    .hero-image { 
+        position: relative; 
+        height: 250px; 
+        background-size: cover; 
+    }
+    .hero-content { 
+        width: 100%; 
+        padding: 40px 24px; 
+        text-align: center; 
+    }
     .hero-actions { justify-content: center; }
-    .audience-grid, .gains-grid, .process-grid { grid-template-columns: 1fr; }
-    .section { padding: 60px 24px; }
-}
 
-/* Reveal */
-.reveal { opacity: 0; transform: translateY(20px); transition: 0.6s var(--ease); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Grid Resets */
+    .gains-grid, .process-grid, .audience-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -257,13 +268,10 @@ a { color: var(--lime); text-decoration: none; }
 <nav class="nav">
     <div class="nav-brand"><span>FreshEyes</span> Software Testing</div>
     
-    <div class="menu-toggle" id="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    <input type="checkbox" id="burger" class="burger-check">
+    <label for="burger" class="burger-label"><span></span></label>
 
-    <div class="nav-links" id="nav-links">
+    <div class="nav-links">
         <a href="#who">Who it's for</a>
         <a href="#gains">Benefits</a>
         <a href="#why">Why</a>
@@ -299,74 +307,32 @@ a { color: var(--lime); text-decoration: none; }
     </div>
 </section>
 
-<section class="section section-alt" id="gains">
+<section class="section" id="gains">
     <div class="container">
+        <div class="section-label reveal">Benefits</div>
         <h2 class="section-title reveal">What you gain</h2>
         <div class="gains-grid reveal">
-            <div class="gain-card"><div class="gain-number">1</div><div>Confidence</div></div>
-            <div class="gain-card"><div class="gain-number">2</div><div>No Surprises</div></div>
-            <div class="gain-card"><div class="gain-number">3</div><div>Documentation</div></div>
-            <div class="gain-card"><div class="gain-number">4</div><div>Credibility</div></div>
-            <div class="gain-card"><div class="gain-number">5</div><div>Quality</div></div>
+            <div class="gain-card"><div class="gain-number">1</div><div class="gain-text">Confidence before release</div></div>
+            <div class="gain-card"><div class="gain-number">2</div><div class="gain-text">Fewer launch surprises</div></div>
+            <div class="gain-card"><div class="gain-number">3</div><div class="gain-text">Clear documentation</div></div>
+            <div class="gain-card"><div class="gain-number">4</div><div class="gain-text">Stronger credibility</div></div>
+            <div class="gain-card"><div class="gain-number">5</div><div class="gain-text">External checkpoint</div></div>
         </div>
     </div>
 </section>
 
-<section class="section" id="why">
+<section class="section contact-section" id="contact" style="text-align: center; background: var(--bg-elevated);">
     <div class="container">
-        <div class="why-split">
-            <div class="why-text">
-                <h2 class="section-title reveal">Your team knows the product too well</h2>
-                <p class="section-desc reveal">External testing adds objectivity and structure before your product reaches customers.</p>
-            </div>
-            <div class="why-image reveal">
-                <img src="/FEST-4.png" alt="Testing">
-            </div>
-        </div>
+        <h2 class="section-title reveal">Ready to ship with confidence?</h2>
+        <a href="mailto:hello@fresheyes.test" class="btn-lime reveal">Get in touch</a>
     </div>
 </section>
 
-<section class="section section-alt" id="how">
-    <div class="container">
-        <h2 class="section-title reveal">How it works</h2>
-        <div class="process-grid reveal">
-            <div class="process-step"><div class="process-num">01</div><h3>Alignment</h3><p>Defining scope and scenarios.</p></div>
-            <div class="process-step"><div class="process-num">02</div><h3>Testing</h3><p>Independent execution.</p></div>
-            <div class="process-step"><div class="process-num">03</div><h3>Reporting</h3><p>Detailed findings.</p></div>
-            <div class="process-step"><div class="process-num">04</div><h3>Verify</h3><p>Optional re-test.</p></div>
-        </div>
-    </div>
-</section>
-
-<section class="section" id="contact" style="text-align: center;">
-    <div class="container">
-        <h2 class="section-title reveal">Ready to ship?</h2>
-        <a href="mailto:hello@fresheyes.com" class="btn-lime reveal">Get in touch</a>
-    </div>
-</section>
-
-<footer class="footer">
+<footer class="footer" style="padding: 40px; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border);">
     &copy; 2026 FreshEyes Software Testing
 </footer>
 
 <script>
-// Burger Menu Logic
-const burger = document.getElementById('mobile-menu');
-const nav = document.getElementById('nav-links');
-
-burger.addEventListener('click', () => {
-    burger.classList.toggle('active');
-    nav.classList.toggle('active');
-});
-
-// Close menu when link is clicked
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        burger.classList.remove('active');
-        nav.classList.remove('active');
-    });
-});
-
 // Reveal logic
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -375,6 +341,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Close mobile menu on click
+const links = document.querySelectorAll('.nav-links a');
+const burger = document.getElementById('burger');
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        burger.checked = false;
+    });
+});
 </script>
 </body>
 </html>
