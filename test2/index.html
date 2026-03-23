@@ -110,42 +110,36 @@ a { color: var(--lime); text-decoration: none; }
 /* ── Hero ── */
 .hero {
     position: relative;
-    min-height: 700px;
+    min-height: 600px; /* Increased for better mobile breathing room */
     display: flex;
     align-items: center;
     overflow: hidden;
     margin-top: 60px;
-    background: var(--bg);
 }
 
 .hero-image {
     position: absolute;
     inset: 0;
-    /* Fixed: Using right center ensures the 'eye' is visible on wide screens */
-    background: url('/my-eyes-lime-black-4.jpg') right center/cover no-repeat;
+    /* Use 'cover' to ensure it fills the space, 'center right' to keep eye/subject visible */
+    background: url('/my-eyes-lime-black-4.jpg') center right/cover no-repeat;
+    background-color: var(--bg);
 }
 
+/* Updated gradients for better text legibility on small screens */
 .hero-image::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* Gradient transitions from solid background to the image */
     background: 
-        linear-gradient(to right, var(--bg) 0%, var(--bg) 20%, rgba(10,18,20,0.7) 45%, transparent 70%),
-        linear-gradient(to top, var(--bg) 0%, transparent 20%);
+        linear-gradient(to right, var(--bg) 10%, rgba(10,18,20,0.7) 40%, transparent 80%),
+        linear-gradient(to top, var(--bg) 0%, transparent 30%);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
     padding: 0 48px;
-    width: 100%;
-    max-width: 1200px; /* Aligns with your container */
-    margin: 0 auto;
-}
-
-.hero-text-wrapper {
-    max-width: 650px; /* Keeps text from stretching too far */
+    max-width: 700px;
 }
 
 .hero-eyebrow {
@@ -161,11 +155,11 @@ a { color: var(--lime); text-decoration: none; }
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(36px, 6vw, 64px);
+    font-size: clamp(32px, 6vw, 56px);
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -2px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     opacity: 0;
     animation: fadeUp 0.8s var(--ease) 0.4s forwards;
 }
@@ -177,16 +171,18 @@ a { color: var(--lime); text-decoration: none; }
 }
 
 .hero-sub {
-    font-size: clamp(16px, 2vw, 19px);
+    font-size: clamp(15px, 2vw, 18px);
     color: var(--text-dim);
+    max-width: 500px;
     line-height: 1.7;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.8s var(--ease) 0.6s forwards;
 }
 
 .hero-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     opacity: 0;
     animation: fadeUp 0.8s var(--ease) 0.8s forwards;
@@ -196,11 +192,11 @@ a { color: var(--lime); text-decoration: none; }
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 16px 36px;
+    padding: 14px 32px;
     background: var(--lime);
     color: var(--bg);
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     border-radius: 8px;
     transition: all 0.3s var(--ease);
 }
@@ -208,17 +204,18 @@ a { color: var(--lime); text-decoration: none; }
 .btn-lime:hover {
     box-shadow: 0 0 32px rgba(190, 248, 18, 0.35);
     transform: translateY(-2px);
+    color: var(--bg);
 }
 
 .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 15px 32px;
+    padding: 12px 24px;
     border: 1px solid var(--border);
     color: var(--text);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     border-radius: 8px;
     transition: all 0.3s var(--ease);
 }
@@ -264,7 +261,7 @@ a { color: var(--lime); text-decoration: none; }
 
 .container { max-width: 1200px; margin: 0 auto; }
 
-/* ── Who ── */
+/* ── Who — audience grid ── */
 .audience-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -301,10 +298,16 @@ a { color: var(--lime); text-decoration: none; }
     content: '';
     position: absolute;
     inset: 0;
-    background: 
+    background:
         linear-gradient(to bottom, var(--bg), transparent 25%),
         linear-gradient(to top, var(--bg-elevated), transparent 25%);
     pointer-events: none;
+}
+
+.photo-break-alt::after {
+    background:
+        linear-gradient(to bottom, var(--bg-elevated), transparent 25%),
+        linear-gradient(to top, var(--bg), transparent 25%);
 }
 
 /* ── Gains ── */
@@ -345,6 +348,13 @@ a { color: var(--lime); text-decoration: none; }
     font-weight: 600;
     color: var(--lime);
     margin-bottom: 12px;
+    line-height: 1;
+}
+
+.gain-text {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
 }
 
 /* ── Why ── */
@@ -366,6 +376,14 @@ a { color: var(--lime); text-decoration: none; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.why-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(190, 248, 18, 0.1);
+    border-radius: 12px;
 }
 
 .why-text blockquote {
@@ -449,18 +467,36 @@ a { color: var(--lime); text-decoration: none; }
     opacity: 0.4;
 }
 
+.process-step:hover .process-num { opacity: 1; }
+
 .process-step h3 {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;
+    color: var(--text);
 }
 
-/* ── Contact & Footer ── */
+.process-step p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* ── Contact ── */
 .contact-section {
     text-align: center;
     background: var(--bg-elevated);
 }
 
+.contact-section .section-title {
+    max-width: none;
+}
+
+.contact-cta {
+    margin-top: 40px;
+}
+
+/* ── Footer ── */
 .footer {
     text-align: center;
     padding: 32px 48px;
@@ -469,7 +505,7 @@ a { color: var(--lime); text-decoration: none; }
     border-top: 1px solid var(--border);
 }
 
-/* ── Animations ── */
+/* ── Reveal animation ── */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -496,32 +532,22 @@ a { color: var(--lime); text-decoration: none; }
 @media (max-width: 768px) {
     .nav { padding: 16px 24px; }
     .nav-links { display: none; }
-    .section { padding: 60px 24px; }
+    .section { padding: 80px 24px; }
     
-    .hero {
-        min-height: auto;
-        padding: 140px 0 100px;
-        text-align: center;
-    }
-    .hero-image {
-        background-position: center center;
-    }
+    /* Hero Mobile Adjustments */
+    .hero { min-height: 100vh; padding-top: 80px; }
+    .hero-image { background-position: center; } /* Centers the eyes on mobile */
     .hero-image::after {
-        background: rgba(10, 18, 20, 0.7); /* Solid darkened overlay for readability */
+        background: linear-gradient(to top, var(--bg) 20%, rgba(10,18,20,0.6) 100%);
     }
-    .hero-content {
-        padding: 0 24px;
-    }
-    .hero-text-wrapper {
-        margin: 0 auto;
-    }
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    .btn-lime, .btn-ghost { width: 100%; max-width: 300px; justify-content: center; }
+    .hero-content { padding: 0 24px; text-align: center; }
+    .hero-sub { margin: 0 auto 32px; }
+    .hero-actions { justify-content: center; }
 
-    .audience-grid, .gains-grid, .what-columns, .process-grid { grid-template-columns: 1fr; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .gains-grid { grid-template-columns: 1fr; }
+    .what-columns { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
     .photo-break { height: 260px; background-attachment: scroll; }
 }
 </style>
@@ -544,14 +570,12 @@ a { color: var(--lime); text-decoration: none; }
 <section class="hero">
     <div class="hero-image"></div>
     <div class="hero-content">
-        <div class="hero-text-wrapper">
-            <div class="hero-eyebrow">Independent Software Testing</div>
-            <h1>See your product through <em>FreshEyes</em></h1>
-            <p class="hero-sub">Structured, independent testing before release - so your end users won't discover the issues first.</p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn-lime">Get in touch</a>
-                <a href="#how" class="btn-ghost">How it works</a>
-            </div>
+        <div class="hero-eyebrow">Independent Software Testing</div>
+        <h1>See your product through <em>FreshEyes</em></h1>
+        <p class="hero-sub">Structured, independent testing before release - so your end users won't discover the issues first.</p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-lime">Get in touch</a>
+            <a href="#how" class="btn-ghost">How it works</a>
         </div>
     </div>
 </section>
@@ -561,10 +585,10 @@ a { color: var(--lime); text-decoration: none; }
         <div class="section-label reveal">Who it's for</div>
         <h2 class="section-title reveal">Built for teams who care about quality</h2>
         <div class="audience-grid reveal">
-            <div class="audience-card">Software developers and teams wanting a fresh perspective</div>
+            <div class="audience-card">Software developers and teams wanting a fresh perspective on their product</div>
             <div class="audience-card">Digital product developers preparing for a release</div>
-            <div class="audience-card">Startups needing external validation before market</div>
-            <div class="audience-card">Product owners who want structured feedback</div>
+            <div class="audience-card">Startups needing external validation before going to market</div>
+            <div class="audience-card">Product owners who want structured feedback from outside the team</div>
         </div>
     </div>
 </section>
@@ -577,10 +601,10 @@ a { color: var(--lime); text-decoration: none; }
         <h2 class="section-title reveal">What you gain</h2>
         <div class="gains-grid reveal">
             <div class="gain-card"><div class="gain-number">1</div><div class="gain-text">Confidence before release</div></div>
-            <div class="gain-card"><div class="gain-number">2</div><div class="gain-text">Fewer surprises</div></div>
-            <div class="gain-card"><div class="gain-number">3</div><div class="gain-text">Clear documentation</div></div>
-            <div class="gain-card"><div class="gain-number">4</div><div class="gain-text">Stronger credibility</div></div>
-            <div class="gain-card"><div class="gain-number">5</div><div class="gain-text">Quality checkpoint</div></div>
+            <div class="gain-card"><div class="gain-number">2</div><div class="gain-text">Fewer unpleasant surprises post-launch</div></div>
+            <div class="gain-card"><div class="gain-number">3</div><div class="gain-text">Clear documentation of issues and risks</div></div>
+            <div class="gain-card"><div class="gain-number">4</div><div class="gain-text">Stronger credibility toward your users</div></div>
+            <div class="gain-card"><div class="gain-number">5</div><div class="gain-text">An external quality checkpoint</div></div>
         </div>
     </div>
 </section>
@@ -591,17 +615,17 @@ a { color: var(--lime); text-decoration: none; }
             <div class="why-text">
                 <div class="section-label reveal">Why it matters</div>
                 <h2 class="section-title reveal">Your team knows the product too well</h2>
-                <p class="section-desc reveal">Developers and internal teams can develop blind spots. Assumptions go unchecked, and small issues can become user frustrations.</p>
+                <p class="section-desc reveal">Developers and internal team members know the product so well that "blind spots" appear. Assumptions go unchecked, things go unnoticed, and smaller issues snowball into end-user frustration.</p>
                 <blockquote class="reveal">Fresh eyes catch what familiar eyes miss.</blockquote>
             </div>
             <div class="why-image reveal">
-                <img src="/FEST-4.png" alt="Testing" loading="lazy">
+                <img src="/FEST-4.png" alt="Software testing in action" loading="lazy">
             </div>
         </div>
     </div>
 </section>
 
-<div class="photo-break" style="background-image: url('/FEST-3.png');"></div>
+<div class="photo-break photo-break-alt" style="background-image: url('/FEST-3.png');"></div>
 
 <section class="section section-alt" id="what">
     <div class="container">
@@ -610,15 +634,15 @@ a { color: var(--lime); text-decoration: none; }
         <div class="what-columns reveal">
             <div class="what-col">
                 <h3>Core Scenarios</h3>
-                <ul><li>Key user journeys</li><li>Goal-based flows</li><li>Critical paths</li></ul>
+                <ul><li>Key user journeys</li><li>Goal-based usage flows</li><li>Critical paths</li></ul>
             </div>
             <div class="what-col">
                 <h3>User Roles</h3>
-                <ul><li>End user</li><li>Admin</li><li>Management</li></ul>
+                <ul><li>End user</li><li>Admin</li><li>Manager</li><li>Restricted roles</li></ul>
             </div>
             <div class="what-col">
-                <h3>Focus</h3>
-                <ul><li>Usability</li><li>Consistency</li><li>Edge cases</li></ul>
+                <h3>Additional Focus</h3>
+                <ul><li>Usability</li><li>Logical consistency</li><li>Edge cases</li><li>Error handling</li></ul>
             </div>
         </div>
     </div>
@@ -629,33 +653,18 @@ a { color: var(--lime); text-decoration: none; }
         <div class="section-label reveal">Process</div>
         <h2 class="section-title reveal">How it works</h2>
         <div class="process-grid reveal">
-            <div class="process-step">
-                <div class="process-num">01</div>
-                <h3>Alignment call</h3>
-                <p>Define scope and user scenarios.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">02</div>
-                <h3>Testing</h3>
-                <p>Independent, structured testing phase.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">03</div>
-                <h3>Report</h3>
-                <p>Detailed documentation of all findings.</p>
-            </div>
-            <div class="process-step">
-                <div class="process-num">04</div>
-                <h3>Re-test</h3>
-                <p>Verification after fixes are deployed.</p>
-            </div>
+            <div class="process-step"><div class="process-num">01</div><h3>Alignment call</h3><p>Define scope and user scenarios.</p></div>
+            <div class="process-step"><div class="process-num">02</div><h3>Structured testing</h3><p>Independent performance testing.</p></div>
+            <div class="process-step"><div class="process-num">03</div><h3>Detailed report</h3><p>Actionable recommendations.</p></div>
+            <div class="process-step"><div class="process-num">04</div><h3>Optional re-test</h3><p>Verification after fixes.</p></div>
         </div>
     </div>
 </section>
 
 <section class="section contact-section" id="contact">
     <div class="container">
-        <h2 class="section-title reveal" style="margin: 0 auto 16px;">Ready to ship with confidence?</h2>
+        <div class="section-label reveal">Let's talk</div>
+        <h2 class="section-title reveal">Ready to ship with confidence?</h2>
         <div class="contact-cta reveal">
             <a href="mailto:your.email@example.com" class="btn-lime">Get in touch</a>
         </div>
