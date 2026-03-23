@@ -43,11 +43,12 @@ a { color: var(--lime); text-decoration: none; }
 
 /* ── Nav ── */
 .nav {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
+    padding: 20px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -113,6 +114,7 @@ a { color: var(--lime); text-decoration: none; }
     display: flex;
     align-items: center;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .hero-image {
@@ -737,6 +739,5 @@ window.addEventListener('scroll', () => {
     });
 }, { passive: true });
 </script>
-
 </body>
 </html>
