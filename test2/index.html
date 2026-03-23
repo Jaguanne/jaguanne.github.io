@@ -107,14 +107,15 @@ a { color: var(--lime); text-decoration: none; }
 .lang-switch a { color: var(--text-muted); font-size: 12px; }
 .lang-switch a:hover { color: var(--lime); }
 
-/* ── Hero ── */
+/* ── Hero (Edited for Scaling) ── */
 .hero {
     position: relative;
-    min-height: 80vh; /* Better default for modern screens */
+    /* Scales height fluidly between 400px and 800px based on width */
+    min-height: clamp(400px, 60vw, 800px); 
     display: flex;
     align-items: center;
     overflow: hidden;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 
 .hero-image {
@@ -124,10 +125,8 @@ a { color: var(--lime); text-decoration: none; }
     background-color: var(--bg);
 }
 
-/* Maintain whole width visibility on wider screens as requested */
 @media (min-width: 1024px) {
-    .hero { min-height: 420px; }
-    .hero-image { background-size: contain; }
+    .hero-image { background-size: contain; background-position: right center; }
 }
 
 .hero-image::after {
@@ -135,19 +134,20 @@ a { color: var(--lime); text-decoration: none; }
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.4) 35%, transparent 60%),
+        linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.4) 45%, transparent 70%),
         linear-gradient(to top, var(--bg) 0%, transparent 25%);
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 0 48px;
-    max-width: 650px;
+    padding: 0 5vw; /* Fluid side padding */
+    width: 100%;
+    max-width: 800px;
 }
 
 .hero-eyebrow {
-    font-size: 12px;
+    font-size: clamp(10px, 1.2vw, 12px);
     font-weight: 500;
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -159,7 +159,8 @@ a { color: var(--lime); text-decoration: none; }
 
 .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(32px, 6vw, 56px);
+    /* Fluid font size based on screen width */
+    font-size: clamp(32px, 5.5vw, 64px); 
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -2px;
@@ -175,11 +176,11 @@ a { color: var(--lime); text-decoration: none; }
 }
 
 .hero-sub {
-    font-size: 18px;
+    font-size: clamp(15px, 1.8vw, 19px);
     color: var(--text-dim);
     max-width: 500px;
     line-height: 1.6;
-    margin-bottom: 32px;
+    margin-bottom: clamp(24px, 4vw, 40px);
     opacity: 0;
     animation: fadeUp 0.8s var(--ease) 0.6s forwards;
 }
@@ -195,11 +196,12 @@ a { color: var(--lime); text-decoration: none; }
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 32px;
+    /* Fluid button padding and font */
+    padding: clamp(10px, 1.5vw, 16px) clamp(20px, 3vw, 36px);
     background: var(--lime);
     color: var(--bg);
     font-weight: 600;
-    font-size: 14px;
+    font-size: clamp(13px, 1.2vw, 15px);
     border-radius: 8px;
     transition: all 0.3s var(--ease);
 }
@@ -207,25 +209,19 @@ a { color: var(--lime); text-decoration: none; }
 .btn-lime:hover {
     box-shadow: 0 0 32px rgba(190, 248, 18, 0.35);
     transform: translateY(-2px);
-    color: var(--bg);
 }
 
 .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 24px;
+    padding: clamp(10px, 1.5vw, 16px) clamp(16px, 2.5vw, 28px);
     border: 1px solid var(--border);
     color: var(--text);
     font-weight: 500;
-    font-size: 14px;
+    font-size: clamp(13px, 1.2vw, 15px);
     border-radius: 8px;
     transition: all 0.3s var(--ease);
-}
-
-.btn-ghost:hover {
-    border-color: var(--lime);
-    color: var(--lime);
 }
 
 /* ── Sections ── */
@@ -537,19 +533,21 @@ a { color: var(--lime); text-decoration: none; }
     .nav-links { display: none; }
     .section { padding: 80px 24px; }
     
-    /* Improved Mobile Hero */
+    /* Mobile Hero Reset */
     .hero { 
         flex-direction: column;
         justify-content: flex-start;
         min-height: auto;
         padding-top: 0;
+        margin-top: 60px;
     }
     
     .hero-image {
         position: relative;
-        height: 300px; /* Control image height on mobile */
+        height: 300px; 
         width: 100%;
         background-size: cover;
+        background-position: center;
     }
 
     .hero-image::after {
@@ -562,7 +560,8 @@ a { color: var(--lime); text-decoration: none; }
         max-width: 100%;
     }
 
-    .hero-sub { margin: 0 auto 32px; }
+    .hero h1 { font-size: 36px; } /* Fixed size for mobile readability */
+    .hero-sub { margin: 0 auto 32px; font-size: 16px; }
     .hero-actions { justify-content: center; flex-direction: column; }
 
     .audience-grid { grid-template-columns: 1fr; }
