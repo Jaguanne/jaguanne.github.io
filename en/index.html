@@ -25,20 +25,9 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
-body {
-    font-family: var(--font-body);
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    font-size: 15px;
-    overflow-x: hidden;
-}
-
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; overflow-x: hidden; }
 ::selection { background: var(--lime); color: var(--bg); }
-
 a { color: var(--lime); text-decoration: none; }
 
 /* ── Nav ── */
@@ -67,7 +56,9 @@ a { color: var(--lime); text-decoration: none; }
     letter-spacing: -0.5px;
 }
 
-.nav-brand span { color: var(--lime); }
+.nav-brand span {
+    color: var(--lime);
+}
 
 .nav-links {
     display: flex;
@@ -83,7 +74,9 @@ a { color: var(--lime); text-decoration: none; }
     transition: color 0.3s;
 }
 
-.nav-links a:hover, .nav-links a.active { color: var(--lime); }
+.nav-links a:hover, .nav-links a.active {
+    color: var(--lime);
+}
 
 .nav-cta {
     padding: 10px 24px;
@@ -104,8 +97,47 @@ a { color: var(--lime); text-decoration: none; }
     border-left: 1px solid var(--border);
 }
 
-.lang-switch a { color: var(--text-muted); font-size: 12px; }
-.lang-switch a:hover { color: var(--lime); }
+.lang-switch a {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.lang-switch a:hover {
+    color: var(--lime);
+}
+
+/* Hamburger */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+}
+.nav-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: var(--lime);
+    border-radius: 2px;
+    transition: all 0.3s var(--ease);
+}
+
+/* Mobile nav */
+.nav-links-mobile {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--bg-elevated);
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+    transition: all 0.3s var(--ease);
+}
 
 /* ── Hero ── */
 .hero {
@@ -124,7 +156,9 @@ a { color: var(--lime); text-decoration: none; }
 }
 
 @media (min-width: 1024px) {
-    .hero-image { background-size: contain; }
+    .hero-image {
+        background-size: contain;
+    }
 }
 
 .hero-image::after {
@@ -528,8 +562,13 @@ a { color: var(--lime); text-decoration: none; }
 @media (max-width: 768px) {
     .nav { padding: 16px 24px; }
     .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+
+    .nav-links-mobile { display: none; }
+    .nav-links-mobile.show { display: flex; }
+
     .section { padding: 80px 24px; }
-    
+
     .hero { 
         flex-direction: column;
         justify-content: flex-start;
@@ -537,23 +576,9 @@ a { color: var(--lime); text-decoration: none; }
         padding-top: 0;
     }
     
-    .hero-image {
-        position: relative;
-        height: 300px;
-        width: 100%;
-        background-size: cover;
-    }
-
-    .hero-image::after {
-        background: linear-gradient(to top, var(--bg) 0%, transparent 50%);
-    }
-
-    .hero-content { 
-        padding: 40px 24px; 
-        text-align: center;
-        max-width: 100%;
-    }
-
+    .hero-image { position: relative; height: 300px; width: 100%; background-size: cover; }
+    .hero-image::after { background: linear-gradient(to top, var(--bg) 0%, transparent 50%); }
+    .hero-content { padding: 40px 24px; text-align: center; max-width: 100%; }
     .hero-sub { margin: 0 auto 32px; }
     .hero-actions { justify-content: center; flex-direction: column; }
 
@@ -569,7 +594,25 @@ a { color: var(--lime); text-decoration: none; }
 
 <nav class="nav">
     <div class="nav-brand"><span>FreshEyes</span> Software Testing</div>
+
+    <div class="nav-toggle" id="nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
     <div class="nav-links">
+        <a href="#who">Who it's for</a>
+        <a href="#gains">Benefits</a>
+        <a href="#why">Why it matters</a>
+        <a href="#what">What I test</a>
+        <a href="#how">Process</a>
+        <a href="#contact" class="nav-cta btn-lime">Get in touch</a>
+        <span class="lang-switch"><a href="/en">EN</a> / <a href="/fi">FI</a></span>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav-links-mobile" id="nav-links-mobile">
         <a href="#who">Who it's for</a>
         <a href="#gains">Benefits</a>
         <a href="#why">Why it matters</a>
@@ -752,10 +795,16 @@ const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
 window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.id; });
-    navLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-    });
+    navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
 }, { passive: true });
+
+// Hamburger toggle
+const navToggle = document.getElementById('nav-toggle');
+const mobileMenu = document.getElementById('nav-links-mobile');
+navToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+    navToggle.classList.toggle('open');
+});
 </script>
 </body>
 </html>
