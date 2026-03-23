@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshEyes Software Testing</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #0D1B1E;
+  --secondary: #325055;
+  --text: #F3F5F7;
+  --background: #1A2A2F;
+  --contrast: #BEF812;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* subtle grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* floating nav with language links */
+.side-nav-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* language links */
+.lang-links {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lang-links a {
+  font-size: 0.9rem;
+  color: rgba(243,245,247,0.6);
+  transition: all 0.25s ease;
+}
+
+.lang-links a:hover {
+  color: var(--contrast);
+  font-weight: 600;
+}
+
+/* nav links */
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-nav a {
+  font-size: 0.9rem;
+  color: rgba(243,245,247,0.6);
+  transition: all 0.25s ease;
+}
+
+.side-nav a:hover {
+  color: var(--contrast);
+  transform: translateX(4px);
+}
+
+.side-nav a.active {
+  color: var(--contrast);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* general links */
+a { color: var(--contrast); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--secondary); }
+
+/* Sections */
+section {
+  padding: 80px 20px;
+  max-width: 900px;
+  margin: auto;
+  margin-bottom: 60px;
+  background: linear-gradient(180deg, #0D1B1E 0%, #13272B 100%);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+section h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--contrast);
+  margin-top: 10px;
+}
+
+section p { max-width: 650px; }
+ul { margin-left: 20px; }
+
+/* Hero */
+.hero-text {
+  background: linear-gradient(180deg, #0D1B1E 0%, #13272B 100%);
+  padding: 80px 20px 40px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.hero-text h1 { font-size: 3rem; margin: 0; }
+.hero-text h1 .contrast { color: var(--contrast); }
+.hero-text p { font-size: 1.2rem; max-width: 700px; margin: 20px auto 0 auto; }
+
+/* Hero image */
+.hero-banner-wrapper {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-banner {
+  width: 100%;
+  height: 100%;
+  background-image: url('/my-eyes-lime-black-3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Parallax */
+.parallax {
+  width: 100%;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.parallax::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(26,42,47,0.5);
+}
+
+/* Steps */
+.steps { display: grid; gap: 30px; grid-template-columns: 1fr; }
+@media(min-width: 700px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .hero-banner-wrapper { height: 360px; }
+}
+
+/* hide nav on small screens */
+@media(max-width: 900px) {
+  .side-nav-wrapper { display: none; }
+}
+
+.step {
+  background: linear-gradient(180deg, #325055, #2A454A);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  transition: all 0.3s ease;
+}
+.step:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.45);
+}
+
+/* Gain */
+.gain-list { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+
+.gain-item {
+  background: linear-gradient(180deg, #325055, #2A454A);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+.gain-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gain-item:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.gain-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--contrast);
+  min-width: 40px;
+  text-align: center;
+}
+
+.gain-item p { font-size: 1.1rem; margin: 0; flex: 1; }
+
+/* Button */
+a.button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: var(--contrast);
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(190,248,18,0);
+}
+
+a.button:hover {
+  background-color: var(--text);
+  box-shadow: 0 0 20px rgba(190,248,18,0.4);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #0D1B1E, #13272B);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- floating nav + language -->
+<div class="side-nav-wrapper">
+  <div class="lang-links">
+    <a href="/en">EN</a>
+    <a href="/fi">FI</a>
+  </div>
+  <nav class="side-nav">
+    <a href="#who">Who</a>
+    <a href="#gain">Gain</a>
+    <a href="#why">Why</a>
+    <a href="#what">What</a>
+    <a href="#how">How</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<div class="hero-text fade-in">
+  <h1><span class="contrast">FreshEyes</span> Software Testing</h1>
+  <p>Independent, structured software testing before release — so your end users won't discover the issues first.</p>
+</div>
+
+<div class="hero-banner-wrapper fade-in">
+  <div class="hero-banner"></div>
+</div>
+
+<section id="who" class="fade-in">
+  <h2>Who is this for</h2>
+  <ul>
+    <li>Software developers and development teams wanting a fresh view of their product</li>
+    <li>Digital product developers preparing for a release</li>
+    <li>Startups needing external validation</li>
+    <li>Product owners who want structured feedback from outside the team</li>
+  </ul>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-1.png');"></div>
+
+<section id="gain" class="fade-in">
+  <h2>What you gain</h2>
+  <div class="gain-list">
+    <div class="gain-item"><div class="gain-number">1</div><p>Confidence before release</p></div>
+    <div class="gain-item"><div class="gain-number">2</div><p>Fewer unpleasant surprises post-launch</p></div>
+    <div class="gain-item"><div class="gain-number">3</div><p>Clear documentation of issues and risks</p></div>
+    <div class="gain-item"><div class="gain-number">4</div><p>Stronger credibility toward your users</p></div>
+    <div class="gain-item"><div class="gain-number">5</div><p>An external quality checkpoint</p></div>
+  </div>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-4.png');"></div>
+
+<section id="why" class="fade-in">
+  <h2>Why external testing matters</h2>
+  <p>Developers and other internal team members know the product too well, which causes "blind spots" to appear. People make assumptions and things go unnoticed, leading to smaller and bigger issues becoming end user frustration. External software testing adds objectivity, structure, and more realistic user perspective before your product reaches customers.</p>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-3.png');"></div>
+
+<section id="what" class="fade-in">
+  <h2>What I test</h2>
+  <p>The software testing I do is primarily based on agreed user scenarios and roles.</p>
+  <h3>Core user scenarios:</h3>
+  <ul>
+    <li>Key user journeys (e.g. sign-up, checkout, submission, settings)</li>
+    <li>Goal-based usage flows</li>
+    <li>Critical paths before release</li>
+  </ul>
+  <h3>User roles:</h3>
+  <ul>
+    <li>End user</li>
+    <li>Admin</li>
+    <li>Manager / other internal role</li>
+    <li>Other roles with different access rights</li>
+  </ul>
+  <h3>Additional focus:</h3>
+  <ul>
+    <li>Usability and clarity</li>
+    <li>Logical consistency</li>
+    <li>Edge cases</li>
+    <li>Error handling</li>
+  </ul>
+</section>
+
+<div class="parallax" style="background-image: url('/FEST-5.png');"></div>
+
+<section id="how" class="fade-in">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="step fade-in">
+      <h3>1. Alignment call</h3>
+      <p>Together we define scope, user scenarios, roles, and timetable for testing the software.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>2. Structured testing</h3>
+      <p>I perform the software testing independently, based on agreed scenarios.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>3. Detailed report</h3>
+      <p>After testing, I will provide you with clear documentation of findings and recommendations.</p>
+    </div>
+    <div class="step fade-in">
+      <h3>4. Optional re-test</h3>
+      <p>If need be, I can do another round of testing for verification after fixes have been deployed.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade-in">
+  <h2>Contact me</h2>
+  <p>Let's be in touch and find out how I can help you!</p>
+  <a href="mailto:your.email@example.com" class="button">Get in touch</a>
+</section>
+
+<footer>
+  <p>&copy; 2026 FreshEyes Software Testing</p>
+</footer>
+
+<script>
+// force scroll to top on load
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+
+// reveal animations
+const elements = document.querySelectorAll('.fade-in, .gain-item');
+function reveal() {
+  const trigger = window.innerHeight + window.scrollY;
+  elements.forEach(el => {
+    if (trigger > el.offsetTop + 60) el.classList.add('visible');
+  });
+}
+
+// active nav highlight
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".side-nav a");
+function updateActiveNav() {
+  let current = "";
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 600) {
+      current = section.getAttribute("id");
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) link.classList.add("active");
+  });
+}
+
+window.addEventListener('scroll', () => {
+  reveal();
+  updateActiveNav();
+});
+window.addEventListener('load', () => {
+  reveal();
+  updateActiveNav();
+});
+</script>
+
+</body>
+</html>
