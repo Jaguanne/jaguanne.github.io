@@ -3,625 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FreshEyes - Independent Software Testing</title>
+<title>FreshEyes — Independent Software Testing | Pre-Release QA</title>
+<meta name="description" content="FreshEyes offers independent, structured software testing before release — so your end users won't discover the issues first.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FreshEyes — Independent Software Testing">
+<meta property="og:description" content="Structured, independent testing before release — so your end users won't discover the issues first.">
+<meta property="og:url" content="https://jaguanne.github.io/en/">
+<meta property="og:image" content="https://jaguanne.github.io/my-eyes-lime-black-4.jpg">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FreshEyes — Independent Software Testing">
+<meta name="twitter:description" content="Structured, independent testing before release — so your end users won't discover the issues first.">
+<meta name="twitter:image" content="https://jaguanne.github.io/my-eyes-lime-black-4.jpg">
+<link rel="canonical" href="https://jaguanne.github.io/en/">
+<link rel="alternate" hreflang="en" href="https://jaguanne.github.io/en/">
+<link rel="alternate" hreflang="fi" href="https://jaguanne.github.io/fi/">
+<link rel="alternate" hreflang="x-default" href="https://jaguanne.github.io/en/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-    --bg: #0a1214;
-    --bg-elevated: #0f1b1f;
-    --bg-card: #132226;
-    --text: #e8ecee;
-    --text-dim: #8a9a9f;
-    --text-muted: #4d6066;
-    --lime: #BEF812;
-    --lime-dim: rgba(190, 248, 18, 0.08);
-    --lime-glow: rgba(190, 248, 18, 0.15);
-    --border: rgba(255, 255, 255, 0.06);
-    --font-body: 'Inter', sans-serif;
-    --font-display: 'Poppins', serif;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; overflow-x: hidden; }
-::selection { background: var(--lime); color: var(--bg); }
-a { color: var(--lime); text-decoration: none; }
-
-/* ── Nav ── */
-.nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 20px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(10, 18, 20, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    transition: all 0.3s var(--ease);
-}
-
-.nav-brand {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.5px;
-}
-
-.nav-brand span {
-    color: var(--lime);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-}
-
-.nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-dim);
-    letter-spacing: 0.5px;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--lime);
-}
-
-.nav-cta {
-    padding: 10px 24px;
-    font-size: 13px;
-    border-radius: 6px;
-    transition: all 0.3s var(--ease);
-}
-
-.nav-cta:hover {
-    transform: translateY(-1px);
-}
-
-.lang-switch {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-left: 16px;
-    padding-left: 16px;
-    border-left: 1px solid var(--border);
-}
-
-.lang-switch a {
-    color: var(--text-muted);
-    font-size: 12px;
-}
-
-.lang-switch a:hover {
-    color: var(--lime);
-}
-
-/* Hamburger */
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 28px;
-    height: 20px;
-    cursor: pointer;
-}
-.nav-toggle span {
-    display: block;
-    height: 3px;
-    width: 100%;
-    background: var(--lime);
-    border-radius: 2px;
-    transition: all 0.3s var(--ease);
-}
-
-/* Mobile nav */
-.nav-links-mobile {
-    display: none;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: var(--bg-elevated);
-    flex-direction: column;
-    gap: 16px;
-    padding: 20px 24px;
-    border-top: 1px solid var(--border);
-    transition: all 0.3s var(--ease);
-}
-
-.nav-links-mobile a.nav-cta {
-    width: auto;
-    display: inline-block;
-}
-
-/* ── Hero ── */
-.hero {
-    position: relative;
-    aspect-ratio: 2200 / 378;
-    max-height: 500px;
-    min-height: 320px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.hero-image {
-    position: absolute;
-    inset: 0;
-    background: url('/my-eyes-lime-black-4.jpg') right center/cover no-repeat;
-    background-color: var(--bg);
-}
-
-@media (min-width: 1024px) {
-    .hero-image {
-        background-size: contain;
-        background-position: right center;
-    }
-}
-
-.hero-image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to right, var(--bg) 0%, rgba(10,18,20,0.4) 35%, transparent 60%),
-        linear-gradient(to top, var(--bg) 0%, transparent 25%);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 0 48px;
-    max-width: clamp(400px, 60vw, 650px);
-}
-
-.hero-eyebrow {
-    font-size: clamp(10px, 1.2vw, 12px);
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: 12px;
-    opacity: 0;
-    animation: fadeUp 0.8s var(--ease) 0.2s forwards;
-}
-
-.hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 5.5vw, 56px);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -2px;
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.8s var(--ease) 0.4s forwards;
-}
-
-.hero h1 em {
-    font-style: italic;
-    color: var(--lime);
-    font-weight: 400;
-}
-
-.hero-sub {
-    font-size: clamp(15px, 1.8vw, 18px);
-    color: var(--text-dim);
-    max-width: 500px;
-    line-height: 1.6;
-    margin-bottom: clamp(20px, 3vw, 32px);
-    opacity: 0;
-    animation: fadeUp 0.8s var(--ease) 0.6s forwards;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 16px;
-    opacity: 0;
-    animation: fadeUp 0.8s var(--ease) 0.8s forwards;
-}
-
-.btn-lime {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: clamp(10px, 1.2vw, 14px) clamp(20px, 2.5vw, 32px);
-    background: var(--lime);
-    color: var(--bg);
-    font-weight: 600;
-    font-size: clamp(12px, 1.3vw, 14px);
-    border-radius: 8px;
-    transition: all 0.3s var(--ease);
-}
-
-.btn-lime:hover {
-    box-shadow: 0 0 32px rgba(190, 248, 18, 0.35);
-    transform: translateY(-2px);
-    color: var(--bg);
-}
-
-.btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: clamp(10px, 1.2vw, 12px) clamp(16px, 2vw, 24px);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-weight: 500;
-    font-size: clamp(12px, 1.3vw, 14px);
-    border-radius: 8px;
-    transition: all 0.3s var(--ease);
-}
-
-.btn-ghost:hover {
-    border-color: var(--lime);
-    color: var(--lime);
-}
-
-/* ── Sections ── */
-.section {
-    padding: 120px 48px;
-    position: relative;
-}
-
-.section-alt { background: var(--bg-elevated); }
-
-.section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--lime);
-    margin-bottom: 12px;
-}
-
-.section-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 600;
-    letter-spacing: -1px;
-    margin-bottom: 20px;
-    max-width: 600px;
-}
-
-.section-desc {
-    color: var(--text-dim);
-    font-size: 16px;
-    max-width: 580px;
-    line-height: 1.8;
-    margin-bottom: 48px;
-}
-
-.container { max-width: 1200px; margin: 0 auto; }
-
-/* ── Who — audience grid ── */
-.audience-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    max-width: 800px;
-}
-
-.audience-card {
-    padding: 24px 28px;
-    background: linear-gradient(to right, var(--lime-dim), transparent 70%);
-    border-left: 2px solid var(--lime);
-    font-size: 15px;
-    color: var(--text-dim);
-    line-height: 1.6;
-    transition: all 0.3s var(--ease);
-}
-
-.audience-card:hover {
-    background: linear-gradient(to right, var(--lime-glow), transparent 70%);
-    color: var(--text);
-}
-
-/* ── Photo break ── */
-.photo-break {
-    height: 400px;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.photo-break::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(to bottom, var(--bg), transparent 25%),
-        linear-gradient(to top, var(--bg-elevated), transparent 25%);
-    pointer-events: none;
-}
-
-.photo-break-alt::after {
-    background:
-        linear-gradient(to bottom, var(--bg-elevated), transparent 25%),
-        linear-gradient(to top, var(--bg), transparent 25%);
-}
-
-/* ── Gains ── */
-.gains-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-}
-
-.gain-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 32px 24px;
-    text-align: center;
-    transition: all 0.4s var(--ease);
-    position: relative;
-    overflow: hidden;
-}
-
-.gain-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--lime);
-    transform: scaleX(0);
-    transition: transform 0.4s var(--ease);
-}
-
-.gain-card:hover::before { transform: scaleX(1); }
-.gain-card:hover { background: var(--bg-elevated); transform: translateY(-4px); }
-
-.gain-number {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 600;
-    color: var(--lime);
-    margin-bottom: 12px;
-    line-height: 1;
-}
-
-.gain-text {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.5;
-}
-
-/* ── Why ── */
-.why-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.why-image {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-}
-
-.why-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.why-image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(190, 248, 18, 0.1);
-    border-radius: 12px;
-}
-
-.why-text blockquote {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.6;
-    border-left: 2px solid var(--lime);
-    padding-left: 24px;
-    margin-top: 32px;
-}
-
-/* ── What ── */
-.what-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
-
-.what-col h3 {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--lime);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-}
-
-.what-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.what-col li {
-    font-size: 14px;
-    color: var(--text-dim);
-    padding-left: 16px;
-    position: relative;
-}
-
-.what-col li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 9px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--lime);
-}
-
-/* ── How ── */
-.process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    background: var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.process-step {
-    background: var(--bg-card);
-    padding: 36px 28px;
-    transition: all 0.4s var(--ease);
-}
-
-.process-step:hover { background: var(--bg-elevated); }
-
-.process-num {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--lime);
-    margin-bottom: 16px;
-    opacity: 0.4;
-}
-
-.process-step:hover .process-num { opacity: 1; }
-
-.process-step h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: var(--text);
-}
-
-.process-step p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-}
-
-/* ── Contact ── */
-.contact-section {
-    text-align: center;
-    background: var(--bg-elevated);
-}
-
-.contact-cta {
-    margin-top: 40px;
-}
-
-/* ── Footer ── */
-.footer {
-    text-align: center;
-    padding: 32px 48px;
-    font-size: 12px;
-    color: var(--text-muted);
-    border-top: 1px solid var(--border);
-}
-
-/* ── Reveal ── */
-.reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: all 0.7s var(--ease);
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Responsive ── */
-@media (max-width: 1000px) {
-    .gains-grid { grid-template-columns: repeat(3, 1fr); }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .why-split { grid-template-columns: 1fr; gap: 40px; }
-}
-
-@media (max-width: 768px) {
-    .nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .nav-toggle { display: flex; }
-
-    .nav-links-mobile { display: none; }
-    .nav-links-mobile.show { display: flex; }
-
-    .section { padding: 80px 24px; }
-
-    .hero {
-        flex-direction: column;
-        justify-content: flex-start;
-        aspect-ratio: unset;
-        min-height: auto;
-        padding-top: 0;
-    }
-    
-    .hero-image {
-        position: relative;
-        height: 300px;
-        width: 100%;
-        background-size: cover;
-    }
-    
-    .hero-image::after {
-        background: linear-gradient(to top, var(--bg) 0%, transparent 50%);
-    }
-    
-    .hero-content {
-        padding: 40px 24px;
-        text-align: center;
-        max-width: 100%;
-    }
-    
-    .hero-sub {
-        margin: 0 auto 32px;
-    }
-    
-    .hero-actions {
-        justify-content: center;
-        flex-direction: row;
-        gap: 16px;
-    }
-
-    .hero-actions a {
-    width: auto;
-    max-width: 200px;
-    }
-
-    .audience-grid { grid-template-columns: 1fr; }
-    .gains-grid { grid-template-columns: 1fr; }
-    .what-columns { grid-template-columns: 1fr; }
-    .process-grid { grid-template-columns: 1fr; }
-    .photo-break { height: 260px; background-attachment: scroll; }
-}
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "FreshEyes Software Testing",
+  "description": "Independent, structured software testing before release.",
+  "url": "https://jaguanne.github.io/en/",
+  "serviceType": "Software Testing",
+  "areaServed": "FI"
+}
+</script>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -730,7 +142,7 @@ a { color: var(--lime); text-decoration: none; }
     </div>
 </section>
 
-<div class="photo-break photo-break-alt" style="background-image: url('/FEST-3.png');"></div>
+<div class="photo-break" style="background-image: url('/FEST-3.png');"></div>
 
 <section class="section section-alt" id="what">
     <div class="container">
@@ -775,22 +187,22 @@ a { color: var(--lime); text-decoration: none; }
         <p class="section-desc reveal">A clear, straightforward process from first call to final report.</p>
         <div class="process-grid reveal">
             <div class="process-step">
-                <div class="process-num">01</div>
+                <div class="process-num">1</div>
                 <h3>Alignment call</h3>
                 <p>Together we define scope, user scenarios, roles, and timetable for testing.</p>
             </div>
             <div class="process-step">
-                <div class="process-num">02</div>
+                <div class="process-num">2</div>
                 <h3>Structured testing</h3>
                 <p>I perform testing independently, based on the agreed scenarios and roles.</p>
             </div>
             <div class="process-step">
-                <div class="process-num">03</div>
+                <div class="process-num">3</div>
                 <h3>Detailed report</h3>
                 <p>Clear documentation of findings, priorities, and actionable recommendations.</p>
             </div>
             <div class="process-step">
-                <div class="process-num">04</div>
+                <div class="process-num">4</div>
                 <h3>Optional re-test</h3>
                 <p>Another round of testing for verification after fixes have been deployed.</p>
             </div>
@@ -802,15 +214,71 @@ a { color: var(--lime); text-decoration: none; }
     <div class="container">
         <div class="section-label reveal">Let's talk</div>
         <h2 class="section-title reveal" style="margin: 0 auto 16px;">Ready to ship with confidence?</h2>
-        <p class="section-desc reveal" style="margin: 0 auto 0; text-align: center;">Let's find out how FreshEyes can help your next release.</p>
-        <div class="contact-cta reveal">
-            <a href="mailto:your.email@example.com" class="btn-lime">Get in touch</a>
+        <p class="section-desc reveal" style="margin: 0 auto 48px; text-align: center;">Let's find out how FreshEyes can help your next release.</p>
+
+        <div class="contact-grid reveal">
+            <!-- Contact info -->
+            <div class="contact-info">
+                <div class="contact-person">
+                    <h3 class="contact-name">Anne Liimatta</h3>
+                    <p class="contact-role">IT professional, software tester, freelancer</p>
+                </div>
+
+                <div class="contact-links">
+                    <a href="#" class="contact-email contact-link" data-user="anne.fresheyes" data-domain="gmail.com">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span class="email-placeholder">Loading…</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/anne-liimatta/" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <p class="contact-note">Based in Finland - available for remote testing projects worldwide.</p>
+            </div>
+
+            <!-- Contact form -->
+            <form class="contact-form" id="contact-form">
+                <input type="hidden" name="access_key" value="71c4ea03-13ae-42e4-a35f-1ef4c91d8ec7">
+                <input type="hidden" name="botcheck">
+                <input type="hidden" name="subject" value="New inquiry via FreshEyes website">
+
+                <!-- Honeypot -->
+                <div class="form-honeypot" aria-hidden="true" tabindex="-1">
+                    <input type="text" name="website_url" tabindex="-1" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="form-label">Name *</label>
+                    <input type="text" id="name" name="name" required class="form-input" placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" id="email" name="email" required class="form-input" placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="company" class="form-label">Company</label>
+                    <input type="text" id="company" name="company" class="form-input" placeholder="Your company (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea id="message" name="message" required class="form-input form-textarea" rows="5" placeholder="Tell me about your project and testing needs..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-lime form-submit">Send message</button>
+                <div class="form-status" id="form-status"></div>
+            </form>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    &copy; 2026 FreshEyes Software Testing
+    &copy; 2026 FreshEyes Software Testing | Business ID: 3160767-3
 </footer>
 
 <script>
@@ -845,6 +313,54 @@ document.querySelectorAll('#nav-links-mobile a').forEach(link => {
         mobileMenu.classList.remove('show');
         navToggle.classList.remove('open');
     });
+});
+
+// Email obfuscation
+document.querySelectorAll('.contact-email').forEach(el => {
+    const user = el.dataset.user;
+    const domain = el.dataset.domain;
+    if (user && domain) {
+        const addr = user + '@' + domain;
+        el.href = 'mailto:' + addr;
+        el.querySelector('.email-placeholder').textContent = addr;
+    }
+});
+
+// Contact form AJAX submission
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    const status = document.getElementById('form-status');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+            status.textContent = 'Thank you! Your message has been sent.';
+            status.classList.add('form-status-success');
+            form.reset();
+        } else {
+            status.textContent = 'Something went wrong. Please try again or email me directly.';
+            status.classList.add('form-status-error');
+        }
+    } catch {
+        status.textContent = 'Something went wrong. Please try again or email me directly.';
+        status.classList.add('form-status-error');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Send message';
 });
 </script>
 </body>
