@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0; url=/en/">
+  <link rel="canonical" href="https://www.fresheyes.fi/en/">
+  <link rel="alternate" hreflang="en" href="https://www.fresheyes.fi/en/">
+  <link rel="alternate" hreflang="fi" href="https://www.fresheyes.fi/fi/">
+  <link rel="alternate" hreflang="x-default" href="https://www.fresheyes.fi/en/">
+  <title>FreshEyes Software Testing</title>
   <script>
     const lang = navigator.language || navigator.userLanguage;
-    if (lang.startsWith('fi')) {
-      window.location.href = '/fi/';
+    if (lang && lang.startsWith('fi')) {
+      window.location.replace('/fi/');
     } else {
-      window.location.href = '/en/';
+      window.location.replace('/en/');
     }
   </script>
 </head>
 <body>
-  <p>Redirecting...</p>
-  <p>
-    If nothing happens:
-    <a href="/en/">English</a> |
-    <a href="/fi/">Suomi</a>
-  </p>
+  <p>Redirecting… / <a href="/en/">English</a> | <a href="/fi/">Suomi</a></p>
 </body>
 </html>
